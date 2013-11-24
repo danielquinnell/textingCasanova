@@ -3,7 +3,7 @@
 		unset($conn);
 	}
 ?>
-	</div>	<!-- articles div -->
+	</div>	<!-- content div -->
 </div>	<!-- maincolumn div -->
 </body>
 </html>
