@@ -68,12 +68,14 @@
 				if ($row = mysql_fetch_array($result))
 				{
 					echo '<div class="item_big';
-					if ($row['stock'] < 1)
+					if ($row['stock'] < 1 &&
+						$row['stock'] != -1)
 					{
-						echo '_soldout';
+						echo ' soldout';
 					}
 					echo '">';
-					if ($row['stock'] < 1)
+					if ($row['stock'] < 1 &&
+						$row['stock'] != -1)
 					{
 						echo '<p class="soldout">OUT OF STOCK</p>';
 					}
