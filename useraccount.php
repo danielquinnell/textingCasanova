@@ -32,7 +32,7 @@
 		$sql = "SELECT a.* " .
 			   "FROM addresses_shipping a " .
 			   "INNER JOIN users u " .
-			   "ON u.address_shipping=a.address_id " .
+			   "ON u.address_id=a.address_id " .
 			   "WHERE address_id=" . $address_id;
 			   
 		$result = mysql_query($sql, $conn)
@@ -70,15 +70,15 @@
 
 <p>
 	Address Line 1: <br />
-    <input type="text" class="textInput" name="address_1" maxlength="100" value="<?php echo htmlspecialchars($address_1); ?>" />
+    <input type="text" class="textInput" name="address_line1" maxlength="100" value="<?php echo htmlspecialchars($address_1); ?>" />
 </p>
 <p>
 	Address Line 2: <br />
-    <input type="text" class="textInput" name="address_2" maxlength="100" value="<?php echo htmlspecialchars($address_2); ?>" />
+    <input type="text" class="textInput" name="address_line2" maxlength="100" value="<?php echo htmlspecialchars($address_2); ?>" />
 </p>
 <p>
 	City: <br />
-    <input type="text" class="textInput" name="address_2" maxlength="100" value="<?php echo htmlspecialchars($city); ?>" />
+    <input type="text" class="textInput" name="city" maxlength="100" value="<?php echo htmlspecialchars($city); ?>" />
 </p>
 <p>
 	State: <br />

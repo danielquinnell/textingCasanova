@@ -86,20 +86,23 @@
 					}
 					echo '">Home</a>';
 					
-					if ($_SESSION['access_lvl'] > 2)
+					if (isset($_SESSION['userid']))
 					{
-						echo ' <a href="admin.php" class="'; 
-						//This code is used for css in order to
-						//highlight the current selected page index
-						if ($_SESSION['currPage'] == "admin")
+						if ($_SESSION['access_lvl'] > 2)
 						{
-							echo 'activePage';
+							echo ' <a href="admin.php" class="'; 
+							//This code is used for css in order to
+							//highlight the current selected page index
+							if ($_SESSION['currPage'] == "admin")
+							{
+								echo 'activePage';
+							}
+							else
+							{
+								echo 'inactivePage';
+							}
+							echo '">Admin</a>';
 						}
-						else
-						{
-							echo 'inactivePage';
-						}
-						echo '">Admin</a>';
 					}
 				?>
             </div> <!-- navigation div -->

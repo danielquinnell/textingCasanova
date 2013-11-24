@@ -53,7 +53,7 @@ em {
 }
 /* Navigation */
 
-#navright {
+#mainfunctions {
 	float:right;
 }
 
@@ -62,11 +62,11 @@ em {
 }
 
 #logobar {
-	background-color:#72B25E;
+	background-color:#CC0000;
 	padding: 10px;
 }
 
-#logoblog {
+#logo {
 	font-family: exo;
 }
 
@@ -75,7 +75,7 @@ em {
 }
 
 #navigation {
-	background-color: #49733C;
+	background-color: #990000;
 	font-weight:bold;
 	padding-top:1px;
 	padding-bottom:1px;
@@ -111,7 +111,7 @@ em {
 }
 
 .activePage {
-	background-color: #69905C;
+	background-color: #CC0000;
 	color: #A3FF86;
 }
 
@@ -142,23 +142,6 @@ h4 {
 	font-family: exo;
 }
 
-.commentName {
-	font-family: exo;
-	font-size: 14px;
-	color:#CCC;
-}
-
-.commentDate {
-	font-family: exo;
-	font-size: 14px;
-	color:#999999;
-}
-
-.commentText {
-	padding-left: 20px;
-	color: #FFF;
-}
-
 h5 {
 	font-family: exo;
 	color:#069;
@@ -172,28 +155,11 @@ p {
 	color: #CCC;
 }
 
-.articleContent {
-	color: #FFF;
-}
-
-.revisionDate {
-	color: #333;
-	font-size: 14px;
-}
-
-.byline {
-	color:#BBBBBB;
-}
-
-.pubdate {
-	color:#999999;
-}
-
 #maincolumn {
 	min-width: 700px;
 }
 
-#articles {
+#content {
 	padding-left: 25px;
 	padding-right: 25px;
 }
@@ -202,8 +168,8 @@ p {
 	color: #359B9B;
 }
 
-.section {
-	background-color: #49733C;
+.item_big {
+	background-color: #FFFFFF;
 	color: #FFF;
 	min-width:800px;
 	margin-top: 10px;
@@ -235,7 +201,7 @@ p {
 }
 
 .scrollerArticles {
-	background-color: #3F6534;
+	background-color: #FFFFFF;
 	color: #FFF;
 	min-width:400px;
 	margin-left: 10px;
@@ -256,7 +222,7 @@ p {
 }
 
 #accountSectionContent {
-	background-color: #49733C;
+	background-color: #FFFFFF;
 	color: #FFF;
 	padding-left: 10px;
 	padding-right: 10px;
