@@ -77,8 +77,8 @@
 					{
 						echo '<p class="soldout">OUT OF STOCK</p>';
 					}
-					echo '<a href="getprod.php?productid=' . $productid . '><h2>' . $row['name'] . '</h2></a>';
-					echo '<a href="getprod.php?productid=' . $productid . '><img src="' . $row['name'] . '_thumb" /img></a>';
+					echo '<a href="getprod.php?productid=' . $productid . '"><h2>' . $row['name'] . '</h2></a>';
+					echo '<a href="getprod.php?productid=' . $productid . '"><img src="images/thumb/' . $row['image_path'] . '_thumb.png" /img></a>';
 					// description
 					echo '<p class="description_short">' . $row['description_short'] . '</p>';
 					//price

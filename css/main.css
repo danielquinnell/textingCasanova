@@ -1,0 +1,297 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Fonts */
+@font-face {
+	font-family: exo;
+	src: local(exo), url("fonts/Exo-ExtraLight.otf") format("opentype");
+}
+
+@font-face {
+	font-family: sertig;
+	src: local(sertig), url("fonts/sertig.otf") format("opentype");
+}
+
+/* Element design */
+html {
+	background-color:#333;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	font-family: exo;
+	color: #65CBCB;
+	text-decoration: none;
+	padding: 1px;
+}
+
+a:hover {
+	background-color: #69905C;
+	color: #A3FF86;
+}
+
+a:active {
+	
+}
+
+a:visited {
+	
+}
+
+a:link {
+	
+}
+
+em {
+	font-family: exo;
+	font-style: italic;
+	color: #CCCCCC;
+}
+/* Navigation */
+
+#navright {
+	float:right;
+}
+
+.head {
+	color: #333;
+}
+
+#logobar {
+	background-color:#72B25E;
+	padding: 10px;
+}
+
+#logoblog {
+	font-family: exo;
+}
+
+#logowelcome {
+	font-family: sertig;
+}
+
+#navigation {
+	background-color: #49733C;
+	font-weight:bold;
+	padding-top:1px;
+	padding-bottom:1px;
+}
+
+#navigation a {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-family: exo;
+	text-decoration: none;
+}
+
+#navigation a:visited {
+	color:#000;
+}
+
+#navigation a:link {
+	color:#000;
+}
+
+#navigation a:hover {
+	background-color: #69905C;
+	color: #A3FF86;
+}
+
+.navigation a:active {
+	background-color: #69905C;
+	color: #A3FF86;
+}
+
+.activePage {
+	background-color: #69905C;
+	color: #A3FF86;
+}
+
+/* Content area */
+
+h2 {
+	color: #A3FF86;
+	font-family: exo;
+	font-weight:200;
+	padding-top: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	color: #A3FF86;
+	font-family: exo;
+	font-weight:200;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+h4 {
+	color: #A3FF86;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin: 0;
+	font-family: exo;
+}
+
+.commentName {
+	font-family: exo;
+	font-size: 14px;
+	color:#CCC;
+}
+
+.commentDate {
+	font-family: exo;
+	font-size: 14px;
+	color:#999999;
+}
+
+.commentText {
+	padding-left: 20px;
+	color: #FFF;
+}
+
+h5 {
+	font-family: exo;
+	color:#069;
+}
+
+p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-family: sertig;
+	font-size: 18px;
+	color: #CCC;
+}
+
+.articleContent {
+	color: #FFF;
+}
+
+.revisionDate {
+	color: #333;
+	font-size: 14px;
+}
+
+.byline {
+	color:#BBBBBB;
+}
+
+.pubdate {
+	color:#999999;
+}
+
+#maincolumn {
+	min-width: 700px;
+}
+
+#articles {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.date {
+	color: #359B9B;
+}
+
+.section {
+	background-color: #49733C;
+	color: #FFF;
+	min-width:800px;
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.buttons {
+	background-color: #444;
+	display: inline;
+	padding: 5px;
+	margin-top: 15px;
+}
+
+
+.scroller {
+	background-color: #3A4736;
+	color: #FFF;
+	min-width:400px;
+	margin-top: 10px;
+	margin-left: 80px;
+	margin-right: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.scrollerArticles {
+	background-color: #3F6534;
+	color: #FFF;
+	min-width:400px;
+	margin-left: 10px;
+	margin-right: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* Account Maintenance */
+
+#accountSection {
+	min-width:200px;
+	margin-top: 10px;
+	margin-left: 40%;
+	margin-right: 40%;
+}
+
+#accountSectionContent {
+	background-color: #49733C;
+	color: #FFF;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+fieldset {
+	font-family: exo;
+}
+
+legend {
+	color: #CCC;
+}
+
+legend > input {
+	color: #FFF;
+}
+
+/* Admin area */
+
+.scrollerUsers {
+	background-color: #3F6534;
+	color: #FFF;
+	min-width:400px;
+	margin-left: 10px;
+	margin-right: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.userNoEdit {
+	font-family: exo;
+	color: #CCC;
+	padding: 1px;
+	margin: 1px;
+}
