@@ -26,7 +26,6 @@ a {
 	font-family: exo;
 	color: #65CBCB;
 	text-decoration: none;
-	padding: 1px;
 }
 
 a:hover {
@@ -169,9 +168,10 @@ p {
 }
 
 .item_big {
-	background-color: #FFFFFF;
+	background-color: #900;
 	color: #FFF;
-	min-width:800px;
+	width:640px;
+	margin-left: 50px;
 	margin-top: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -199,6 +199,7 @@ p {
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
 
 .scrollerArticles {
 	background-color: #FFFFFF;

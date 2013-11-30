@@ -1,0 +1,142 @@
+@charset "utf-8";
+/* CSS Document */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* IMAGE RESIZE */
+.item_icon {
+	width: 64px;
+	height: 64px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 5px 0px 5px 5px;
+}
+.col:first-child { margin-left: 0; }
+
+
+/*  GROUPING  */
+.group {
+	background: #F00;
+	width: 710px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.group:before,
+.group:after {
+	content:"";
+	display:table;
+}
+.group:after {
+	clear:both;
+}
+
+/*  MAIN LIST  */
+.main_list {
+	background: #F00;
+	width: 600px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.main_list:before,
+.main_list:after {
+	content:"";
+	display:table;
+}
+.main_list:after {
+	clear:both;
+}
+
+/*  GRID OF SEVEN */
+.span_1_of_7 {
+	width: 70px;
+}
+.span_2_of_7 {
+	width: 100px;
+}
+.span_3_of_7 {
+	width: 100px;
+}
+.span_4_of_7 {
+	width: 90px;
+}
+.span_5_of_7 {
+	width: 130px;
+}
+.span_6_of_7 {
+	width: 110px;
+}
+.span_7_of_7 {
+	width: 80px;
+}
+
+/* GRID OF THREE */
+.span_1_of_3 {
+	width: 360px;
+}
+.span_2_of_3 {
+	width: 260px;
+}
+.span_3_of_3 {
+	width: 80px;
+}
+
+.span_1_of_3-2 {
+	width: 220px;
+}
+.span_2_of_3-2 {
+	width: 150px;
+}
+.span_3_of_3-2 {
+	width: 100px;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.col { 
+		margin: 5px 0px 5px 5px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	/*  GRID OF SEVEN */
+	.span_1_of_7 {
+		width: 70px;
+	}
+	.span_2_of_7 {
+		width: 100px;
+	}
+	.span_3_of_7 {
+		width: 100px;
+	}
+	.span_4_of_7 {
+		width: 90px;
+	}
+	.span_5_of_7 {
+		width: 130px;
+	}
+	.span_6_of_7 {
+		width: 110px;
+	}
+	.span_7_of_7 {
+		width: 80px;
+	}
+	
+	/* GRID OF THREE */
+	.span_1_of_3 {
+		width: 360px;
+	}
+	.span_2_of_3 {
+		width: 240px;
+	}
+	.span_3_of_3 {
+		width: 80px;
+	}
+}

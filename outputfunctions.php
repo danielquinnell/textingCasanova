@@ -79,14 +79,22 @@
 					{
 						echo '<p class="soldout">OUT OF STOCK</p>';
 					}
-					echo '<a href="getprod.php?productid=' . $productid . '"><h2>' . $row['name'] . '</h2></a>';
+					echo '<div class="section main_list">';
+					echo '<div class="col span_1_of_3-2">';
 					echo '<a href="getprod.php?productid=' . $productid . '"><img src="images/thumb/' . $row['image_path'] . '_thumb.png" /img></a>';
+					echo '</div>';
+					echo '<div class="col span_2_of_3-2">';
+					echo '<a href="getprod.php?productid=' . $productid . '"><h3>' . $row['name'] . '</h3></a>';
 					// description
 					echo '<p class="description_short">' . $row['description_short'] . '</p>';
+					echo '</div>';
+					echo '<div class="col span_3_of_3-2">';
 					//price
 					echo '<p class="price">$' . $row['price'] . '</p>';
 					//cart button
 					echo '<a href="transact-product.php?action=AddProduct&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
+					echo '</div>';
+					echo '</div>';
 				}
 			}
 			

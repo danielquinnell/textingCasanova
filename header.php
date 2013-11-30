@@ -4,6 +4,7 @@
     <head>
     	<title>Texting Casanova</title>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <link rel="stylesheet" type="text/css" href="css/grid.css" />
         <script src="ckeditor/ckeditor.js"></script>
     </head>
 
