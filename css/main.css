@@ -168,7 +168,11 @@ p {
 }
 
 .item_big {
+<<<<<<< HEAD
 	background-color: #900;
+=======
+	background-color: #FFFFFF;
+>>>>>>> updated css
 	color: #FFF;
 	width:640px;
 	margin-left: 50px;
