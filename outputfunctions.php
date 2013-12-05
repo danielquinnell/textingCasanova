@@ -92,7 +92,7 @@
 					//price
 					echo '<p class="price">$' . $row['price'] . '</p>';
 					//cart button
-					echo '<a href="transact-product.php?action=AddProduct&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
+					echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
 					echo '</div>';
 					echo '</div>';
 				}
