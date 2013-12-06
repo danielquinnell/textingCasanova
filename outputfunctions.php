@@ -79,6 +79,11 @@
 					{
 						echo '<p class="soldout">OUT OF STOCK</p>';
 					}
+					else if ($row['stock'] < 5 &&
+							 $row['stock'] != -1)
+					{
+						echo '<p class="soldout">Only ' . $row['stock'] . ' left!</p>';
+					}
 					echo '<div class="section main_list">';
 					echo '<div class="col span_1_of_3-2">';
 					echo '<a href="getprod.php?productid=' . $productid . '"><img src="images/thumb/' . $row['image_path'] . '_thumb.png" /img></a>';
@@ -92,7 +97,17 @@
 					//price
 					echo '<p class="price">$' . $row['price'] . '</p>';
 					//cart button
-					echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
+					if (!($row['stock'] <= 1 &&
+						$row['stock'] != -1))
+					{
+						echo '<form method="post" action="transact-product.php">';
+						//echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
+						echo '
+							<input type="submit" class="submit" name="action" value="Add To Cart" />
+							<input type="hidden" name="productid" value="' . $productid . '"/>
+							</form>
+							';
+					}
 					echo '</div>';
 					echo '</div>';
 				}

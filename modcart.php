@@ -2,6 +2,12 @@
 	require_once 'conn.php';
 	$page = "cart";
 	require_once 'header.php';
+	
+	if (isset($_SESSION['item_change_alert']))
+	{
+		echo '<h3>' . $_SESSION['item_change_alert'] . '</h3>';
+		unset($_SESSION['item_change_alert']);
+	}
 	//echo '<div class="content">';
 	//echo '<div id="cart_header">';
 	//echo '<span class="quantity inline"><h3>Quantity</h3></span>';
@@ -55,7 +61,7 @@
 			$cartItems = array();
 			
 			$totalPrice = 0;
-			if ($_SESSION['userid'])
+			if (isset($_SESSION['userid']))
 			{
 				$sql = "SELECT * " . 
 				  	   "FROM cart_items " .
@@ -67,7 +73,7 @@
 					//For all items in the cart
 					while ($row = mysql_fetch_array($result))
 					{
-						$sql = "SELECT image_path, name, price " . 
+						$sql = "SELECT image_path, name, price, stock " . 
 						   "FROM products " .
 						   "WHERE product_id=" . $row['product_id'];
 						
@@ -81,7 +87,8 @@
 								"image_path" => $prod['image_path'],
 								"name" => $prod['name'],
 								"price" => $prod['price'],
-								"quantity" => $row['quantity']
+								"quantity" => $row['quantity'],
+								"stock" => $prod['stock']
 								);
 							$totalPrice += ($row['quantity']*$prod['price']);
 							$cartItems[] = $tempProdArray;
@@ -100,14 +107,19 @@
 				//Simplest solution would be to tell
 				//the user they are required to login
 			}
-			
 			//Populate based on an array that was just built
 			foreach ($cartItems as $item)
 			{
+				//=================================================================
+				//If you want to make this more robust, then do a query
+				//for the amount of the item in stock
+				//=================================================================
 				echo '<div class="section group">
-					<div class="col span_1_of_7"><p>';
-				echo $item['quantity'];
-				echo '</p>
+					<form method="post" action="transact-product.php">
+					<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
+					<div class="col span_1_of_7"><input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
+						($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
+				echo '
 					</div>
 					<div class="col span_2_of_7">';
 				echo '<a href="getprod.php?productid=' . $item['product_id'] . '"><img src="images/thumb/' . $item['image_path'] . '_thumb.png" class="item_icon" /img></a>';
@@ -134,6 +146,7 @@
 					<div class="col span_7_of_7">
 						<input type="submit" class="submit" name="action" value="Delete Item" />
 					</div>
+					</form>
 				</div>';
 			}
 			
@@ -145,7 +158,9 @@
 			echo '$' . $totalPrice . '</p>';
 			echo '	</div>
 					<div class="col span_3_of_3">
+					<form method="post" action="transact-product.php">
 						<input type="submit" class="submit" name="action" value="Empty Cart" />
+					</form>
 					</div>
 				  </div>';
 			?>
