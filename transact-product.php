@@ -222,90 +222,33 @@
 						isset($_POST['quantity']) &&
 						isset($_SESSION['userid']))
 					{
-						$sql = "SELECT stock " .
-							   "FROM products " . 
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not select stock for item: ' . mysql_error());
-						
-						$stock = 0;
-						$result = mysql_query($sql, $conn);
-						if (mysql_num_rows($result)>0)
-						{
-							$row = mysql_fetch_array($result);
-							$stock = $row['stock'];
-						}
-						
-						$sql = "SELECT quantity " . 
-							   "FROM cart_items " . 
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not select cart item quantity: ' . mysql_error());
-						
-						$cart_quantity = 0;
-						$result = mysql_query($sql, $conn);
-						$row;
-						if (mysql_num_rows($result)>0)
-						{
-							$row = mysql_fetch_array($result);
-							$cart_quantity = $row['quantity'];
-						}
-						
-						if ($stock != -1)
-						{
-							$stock += $cart_quantity;
-						}
-						
-						$sql = "DELETE FROM cart_items " .
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not delete item from cart: ' . mysql_error());
-						
-						if ($stock != -1)
-						{
-						$sql = "UPDATE products " .
-							   "SET stock= " . $stock . " " .
-							   "WHERE product_id=" . $_POST['productid'];
-						}
-						
-						mysql_query($sql, $conn)
-							or die('Could not update item quantity: ' . mysql_error());
-							
-						$sql = "SELECT name " .
-							   "FROM products " . 
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not select name for item: ' . mysql_error());
-						
-						$result = mysql_query($sql, $conn);
-						if (mysql_num_rows($result)>0)
-						{
-							$row = mysql_fetch_array($result);
-							$_SESSION['item_change_alert'] = "Deleted item: " . $row['name'] . " from cart.";
-						}
+						deleteItem($_POST['productid'], $conn);
 					}
 					redirect('modcart.php');
 					break;
-				case 'Empty CartDONTALLOWYET':
-					if ($isset($_SESSION['userid']))
+				case 'Empty Cart':
+					if (isset($_SESSION['userid']))
 					{
-						/*
-						$sql = "DELETE FROM cart_items " .
-							   "WHERE user_id=" . $_SESSION['userid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not empty cart: ' . mysql_error());
-						*/
 						//Can't do previous option. Have to return all
 						//items in cart to the inventory stock
 						//Will have to get all rows in the cart for the
 						//user, and update each one specificall. Maybe call
 						//a function 'delete' and export the delete case
 						//functionality to a function? YES do that;
+						
+						$sql = "SELECT product_id " . 
+							   "FROM cart_items " .
+							   "WHERE user_id=" . $_SESSION['userid'];
+				   	   
+						$result = mysql_query($sql, $conn);
+						if (mysql_num_rows($result)>0)
+						{
+							while ($row = mysql_fetch_array($result))
+							{
+								deleteItem($row['product_id'], $conn);
+							}
+						}
+						
 						if (mysql_affected_rows() > 0)
 						{
 							$_SESSION['item_change_alert'] = "Cart emptied!";
@@ -440,5 +383,82 @@
 	else
 	{
 		redirect('index.php');
+	}
+	
+	function deleteItem($productid, $conn)
+	{
+		//Get the current stock for the item
+		$sql = "SELECT stock " .
+			   "FROM products " . 
+			   "WHERE product_id=" . $productid;
+		
+		mysql_query($sql, $conn)
+			or die('Could not select stock for item: ' . mysql_error());
+		
+		$stock = 0;
+		$result = mysql_query($sql, $conn);
+		if (mysql_num_rows($result)>0)
+		{
+			$row = mysql_fetch_array($result);
+			$stock = $row['stock'];
+		}
+		
+		//Get the quantity currently in the cart
+		$sql = "SELECT quantity " . 
+			   "FROM cart_items " . 
+			   "WHERE product_id=" . $productid;
+		
+		mysql_query($sql, $conn)
+			or die('Could not select cart item quantity: ' . mysql_error());
+		
+		$cart_quantity = 0;
+		$result = mysql_query($sql, $conn);
+		$row;
+		if (mysql_num_rows($result)>0)
+		{
+			$row = mysql_fetch_array($result);
+			$cart_quantity = $row['quantity'];
+		}
+		
+		//-1 means unlimited, so don't add to the stock
+		//If not unlimited, that add whatever was in the
+		//cart back to the stock
+		if ($stock != -1)
+		{
+			$stock += $cart_quantity;
+		}
+		
+		//Remove the item from the cart
+		$sql = "DELETE FROM cart_items " .
+			   "WHERE product_id=" . $productid;
+		
+		mysql_query($sql, $conn)
+			or die('Could not delete item from cart: ' . mysql_error());
+		
+		//Run SQL to update the stock if its not unlimited
+		if ($stock != -1)
+		{
+		$sql = "UPDATE products " .
+			   "SET stock= " . $stock . " " .
+			   "WHERE product_id=" . $productid;
+		}
+		
+		mysql_query($sql, $conn)
+			or die('Could not update item quantity: ' . mysql_error());
+		
+		//Get the item name for display to the user
+		$sql = "SELECT name " .
+			   "FROM products " . 
+			   "WHERE product_id=" . $productid;
+		
+		mysql_query($sql, $conn)
+			or die('Could not select name for item: ' . mysql_error());
+		
+		$result = mysql_query($sql, $conn);
+		if (mysql_num_rows($result)>0)
+		{
+			$row = mysql_fetch_array($result);
+			$_SESSION['item_change_alert'] += "Deleted item: " . $row['name'] . " from cart. \n";
+		}
 	}
 ?>

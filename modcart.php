@@ -101,8 +101,9 @@
 					}
 					else
 					{
-						echo " <br />\n";
-						echo " There are currently no products to view.\n";
+						echo '<div class="section group"> 
+						<p>There are currently no products to view.</p>
+						</div>';
 					}
 				
 				//Populate based on an array that was just built
