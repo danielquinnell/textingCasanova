@@ -26,143 +26,149 @@
 	//echo '</div>';
 ?>
 	<h2>Cart</h2>
-    	<div class="section group">
-        <!--first row -->
-        	<div class="col span_1_of_7">
-                	<h3>Quantity</h3>
-            </div>
-        	<div class="col span_2_of_7">
-                	<h3>Item Image</h3>
-            </div>
-        	<div class="col span_3_of_7">
-                	<h3>Item Name</h3>
-            </div>
-        	<div class="col span_4_of_7">
-                	<h3>Price Each</h3>
-            </div>
-        	<div class="col span_5_of_7">
-                	<h3>Extended Price</h3>
-            </div>
-        	<div class="col span_6_of_7">
-            </div>
-        	<div class="col span_7_of_7">
-            </div>
-        </div>
-        <form method="post" action="transact-product.php">
-        <!-- 1st row END -->
-        <!-- Item Rows -->
+    	
         <?php
-			//Will have to revise this later...
-			if (!isset($_SESSION['cartitems']))
-			{
-				$_SESSION['cartitems'] = array();
-			}
-			
-			$cartItems = array();
-			
-			$totalPrice = 0;
 			if (isset($_SESSION['userid']))
 			{
-				$sql = "SELECT * " . 
-				  	   "FROM cart_items " .
-				   	   "WHERE user_id=" . $_SESSION['userid'];
-			   
-				$result = mysql_query($sql, $conn);
-				if (mysql_num_rows($result)>0)
+				echo '
+					<div class="section group">
+					<!--first row -->
+						<div class="col span_1_of_7">
+								<h3>Quantity</h3>
+						</div>
+						<div class="col span_2_of_7">
+								<h3>Item Image</h3>
+						</div>
+						<div class="col span_3_of_7">
+								<h3>Item Name</h3>
+						</div>
+						<div class="col span_4_of_7">
+								<h3>Price Each</h3>
+						</div>
+						<div class="col span_5_of_7">
+								<h3>Extended Price</h3>
+						</div>
+						<div class="col span_6_of_7">
+						</div>
+						<div class="col span_7_of_7">
+						</div>
+					</div>
+					<form method="post" action="transact-product.php">
+					<!-- 1st row END -->
+					<!-- Item Rows -->
+					';
+				//Will have to revise this later...
+				if (!isset($_SESSION['cartitems']))
 				{
-					//For all items in the cart
-					while ($row = mysql_fetch_array($result))
+					$_SESSION['cartitems'] = array();
+				}
+				
+				$cartItems = array();
+				
+				$totalPrice = 0;
+				
+					$sql = "SELECT * " . 
+						   "FROM cart_items " .
+						   "WHERE user_id=" . $_SESSION['userid'];
+				   
+					$result = mysql_query($sql, $conn);
+					if (mysql_num_rows($result)>0)
 					{
-						$sql = "SELECT image_path, name, price, stock " . 
-						   "FROM products " .
-						   "WHERE product_id=" . $row['product_id'];
-						
-						//Insert product information, including quantity
-						$product = mysql_query($sql, $conn);
-						if (mysql_num_rows($product)==1)
+						//For all items in the cart
+						while ($row = mysql_fetch_array($result))
 						{
-							$prod = mysql_fetch_array($product);
-							$tempProdArray = array(
-								"product_id" => $row['product_id'],
-								"image_path" => $prod['image_path'],
-								"name" => $prod['name'],
-								"price" => $prod['price'],
-								"quantity" => $row['quantity'],
-								"stock" => $prod['stock']
-								);
-							$totalPrice += ($row['quantity']*$prod['price']);
-							$cartItems[] = $tempProdArray;
+							$sql = "SELECT image_path, name, price, stock " . 
+							   "FROM products " .
+							   "WHERE product_id=" . $row['product_id'];
+							
+							//Insert product information, including quantity
+							$product = mysql_query($sql, $conn);
+							if (mysql_num_rows($product)==1)
+							{
+								$prod = mysql_fetch_array($product);
+								$tempProdArray = array(
+									"product_id" => $row['product_id'],
+									"image_path" => $prod['image_path'],
+									"name" => $prod['name'],
+									"price" => $prod['price'],
+									"quantity" => $row['quantity'],
+									"stock" => $prod['stock']
+									);
+								$totalPrice += ($row['quantity']*$prod['price']);
+								$cartItems[] = $tempProdArray;
+							}
 						}
 					}
-				}
-				else
+					else
+					{
+						echo " <br />\n";
+						echo " There are currently no products to view.\n";
+					}
+				
+				//Populate based on an array that was just built
+				foreach ($cartItems as $item)
 				{
-					echo " <br />\n";
-					echo " There are currently no products to view.\n";
+					//=================================================================
+					//If you want to make this more robust, then do a query
+					//for the amount of the item in stock
+					//=================================================================
+					echo '<div class="section group">
+						<form method="post" action="transact-product.php">
+						<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
+						<div class="col span_1_of_7"><input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
+							($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
+					echo '
+						</div>
+						<div class="col span_2_of_7">';
+					echo '<a href="getprod.php?productid=' . $item['product_id'] . '"><img src="images/thumb/' . $item['image_path'] . '_thumb.png" class="item_icon" /img></a>';
+					
+					echo '</div>
+						<div class="col span_3_of_7"><p>';
+					echo $item['name'];
+					
+					echo '</p>
+						</div>
+						<div class="col span_4_of_7"><p>$';
+					echo $item['price'];
+					
+					echo'</p>
+						</div>
+						<div class="col span_5_of_7"><p>';
+					echo '$' . $item['price']*$item['quantity'];
+					
+					echo '</p>
+						</div>
+						<div class="col span_6_of_7">
+							<input type="submit" class="submit" name="action" value="Change Quantity" />
+						</div>
+						<div class="col span_7_of_7">
+							<input type="submit" class="submit" name="action" value="Delete Item" />
+						</div>
+						</form>
+					</div>';
 				}
-			}
+				
+				echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Your total before shipping is: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+				echo '$' . $totalPrice . '</p>';
+				echo '	</div>
+						<div class="col span_3_of_3">
+						<form method="post" action="transact-product.php">
+							<input type="submit" class="submit" name="action" value="Empty Cart" />
+						</form>
+						</div>
+					  </div>';
+					  }
 			else
 			{
 				//Populate based on session data?
 				//Simplest solution would be to tell
 				//the user they are required to login
+				echo '<em>Please login to view the cart.</em>';
 			}
-			//Populate based on an array that was just built
-			foreach ($cartItems as $item)
-			{
-				//=================================================================
-				//If you want to make this more robust, then do a query
-				//for the amount of the item in stock
-				//=================================================================
-				echo '<div class="section group">
-					<form method="post" action="transact-product.php">
-					<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
-					<div class="col span_1_of_7"><input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
-						($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
-				echo '
-					</div>
-					<div class="col span_2_of_7">';
-				echo '<a href="getprod.php?productid=' . $item['product_id'] . '"><img src="images/thumb/' . $item['image_path'] . '_thumb.png" class="item_icon" /img></a>';
-				
-				echo '</div>
-					<div class="col span_3_of_7"><p>';
-				echo $item['name'];
-				
-				echo '</p>
-					</div>
-					<div class="col span_4_of_7"><p>';
-				echo $item['price'];
-				
-				echo'</p>
-					</div>
-					<div class="col span_5_of_7"><p>';
-				echo '$' . $item['price']*$item['quantity'];
-				
-				echo '</p>
-					</div>
-					<div class="col span_6_of_7">
-						<input type="submit" class="submit" name="action" value="Change Quantity" />
-					</div>
-					<div class="col span_7_of_7">
-						<input type="submit" class="submit" name="action" value="Delete Item" />
-					</div>
-					</form>
-				</div>';
-			}
-			
-			echo '<div class="section group">
-					<div class="col span_1_of_3">
-						<p>Your total before shipping is: </p>
-					</div>
-					<div class="col span_2_of_3"><p>';
-			echo '$' . $totalPrice . '</p>';
-			echo '	</div>
-					<div class="col span_3_of_3">
-					<form method="post" action="transact-product.php">
-						<input type="submit" class="submit" name="action" value="Empty Cart" />
-					</form>
-					</div>
-				  </div>';
 			?>
         </form>
         <!-- Item Rows END -->

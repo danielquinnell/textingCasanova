@@ -98,7 +98,8 @@
 					echo '<p class="price">$' . $row['price'] . '</p>';
 					//cart button
 					if (!($row['stock'] <= 1 &&
-						$row['stock'] != -1))
+						$row['stock'] != -1) &&
+						isset($_SESSION['userid']))
 					{
 						echo '<form method="post" action="transact-product.php">';
 						//echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
