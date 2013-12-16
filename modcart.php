@@ -44,7 +44,7 @@
 								<h3>Item Name</h3>
 						</div>
 						<div class="col span_4_of_7">
-								<h3>Price Each</h3>
+								<h3>Unit Price</h3>
 						</div>
 						<div class="col span_5_of_7">
 								<h3>Extended Price</h3>

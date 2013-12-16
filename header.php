@@ -16,7 +16,7 @@
             
             <div id='mainfunctions'>
                 <form method="get" action="search.php">
-                    <p class='head'>Search</p>
+                    <p class='head'>Search Website</p>
                     <p>
                         <input id="searchkeywords" type="text" name="keywords"
                             <?php

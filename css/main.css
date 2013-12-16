@@ -56,7 +56,9 @@ em {
 /* Navigation */
 
 #mainfunctions {
-	float:right;
+	float: right;
+	margin-left: 60%;
+	
 }
 
 .head {
@@ -84,6 +86,7 @@ em {
 	padding-bottom:1px;
 }
 
+/*home button*/
 #navigation a {
 	padding-top: 1px;
 	padding-bottom: 1px;
@@ -161,7 +164,10 @@ p {
 
 /* Index */
 .cart_mini {
+	/*float: right;*/
+	margin-top: 7%;
 	float: right;
+	clear: left;
 }
 
 #maincolumn {
