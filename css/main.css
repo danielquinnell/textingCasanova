@@ -159,6 +159,11 @@ p {
 	color: #000;
 }
 
+/* Index */
+.cart_mini {
+	float: right;
+}
+
 #maincolumn {
 	min-width: 700px;
 }
@@ -173,11 +178,7 @@ p {
 }
 
 .item_big {
-<<<<<<< HEAD
 	background-color: #900;
-=======
-	background-color: #FFFFFF;
->>>>>>> updated css
 	color: #000;
 	width:640px;
 	margin-left: 50px;

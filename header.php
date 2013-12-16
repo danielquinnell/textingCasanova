@@ -34,18 +34,7 @@
                 <?php
                 	if (!isset($_SESSION['userid']))
 					{
-						echo ' <a href="login.php" class="';
-						//This code is used for css in order to
-						//highlight the current selected page index
-						if ($_SESSION['currPage'] == "login")
-						{
-							echo 'activePage';
-						}
-						else
-						{
-							echo 'inactivePage';
-						}
-						echo '">Login</a>';
+						echo ' <a href="login.php">Login</a>';
 					}
 					else
 					{

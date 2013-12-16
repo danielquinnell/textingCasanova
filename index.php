@@ -1,14 +1,15 @@
 <?php
 	require_once 'conn.php';
 	require_once 'outputfunctions.php';
-	require_once 'modcart.php';
 	$page = "index";
 	require_once 'header.php';
 	
+	echo '<div class="cart_mini">';
+	include('modcart.php');
+	echo '</div>';
+	
 	$sql = "SELECT product_id " . 
 		   "FROM products";
-		   //"FROM products " . 
-		   //"ORDER BY date_published DESC";
 		   
 	$result = mysql_query($sql, $conn);
 	if (mysql_num_rows($result)==0)
@@ -23,13 +24,6 @@
 			outputProduct($row['product_id'], FALSE);
 		}
 	}
-	
-	function miniCart(){
-	   ob_start();
-	   include('modcart.php');
-	   $page2 = ob_get_clean();
-	   return $page2;
-	   }
 	
 	require_once 'footer.php';
 ?>
