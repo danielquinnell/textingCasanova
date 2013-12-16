@@ -37,6 +37,22 @@
 	clear:both;
 }
 
+/*  GROUPING - CHECKOUT  */
+.group_checkout {
+	background: #F00;
+	width: 440px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.group_checkout:before,
+.group_checkout:after {
+	content:"";
+	display:table;
+}
+.group_checkout:after {
+	clear:both;
+}
+
 /*  MAIN LIST  */
 .main_list {
 	background: #F00;
@@ -97,6 +113,19 @@
 	width: 100px;
 }
 
+/* GRID OF TWO */
+.span_1_of_2 {
+	width: 200px;
+	text-align:right;
+}
+.span_2_of_2 {
+	width: 200px;
+}
+
+.textInput {
+	width: 100%;
+}
+
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 
 @media only screen and (max-width: 480px) {
@@ -138,5 +167,13 @@
 	}
 	.span_3_of_3 {
 		width: 80px;
+	}
+	
+	/* GRID OF THREE */
+	.span_1_of_2 {
+		width: 200px;
+	}
+	.span_2_of_2 {
+		width: 200px;
 	}
 }

@@ -1,5 +1,6 @@
 <?php
 	require_once 'conn.php';
+	require_once 'outputfunctions.php';
 	$page = "cart";
 	require_once 'header.php';
 	
@@ -101,8 +102,9 @@
 					}
 					else
 					{
-						echo " <br />\n";
-						echo " There are currently no products to view.\n";
+						echo '<div class="section group"> 
+						<p>There are currently no products to view.</p>
+						</div>';
 					}
 				
 				//Populate based on an array that was just built
@@ -112,40 +114,7 @@
 					//If you want to make this more robust, then do a query
 					//for the amount of the item in stock
 					//=================================================================
-					echo '<div class="section group">
-						<form method="post" action="transact-product.php">
-						<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
-						<div class="col span_1_of_7"><input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
-							($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
-					echo '
-						</div>
-						<div class="col span_2_of_7">';
-					echo '<a href="getprod.php?productid=' . $item['product_id'] . '"><img src="images/thumb/' . $item['image_path'] . '_thumb.png" class="item_icon" /img></a>';
-					
-					echo '</div>
-						<div class="col span_3_of_7"><p>';
-					echo $item['name'];
-					
-					echo '</p>
-						</div>
-						<div class="col span_4_of_7"><p>$';
-					echo $item['price'];
-					
-					echo'</p>
-						</div>
-						<div class="col span_5_of_7"><p>';
-					echo '$' . $item['price']*$item['quantity'];
-					
-					echo '</p>
-						</div>
-						<div class="col span_6_of_7">
-							<input type="submit" class="submit" name="action" value="Change Quantity" />
-						</div>
-						<div class="col span_7_of_7">
-							<input type="submit" class="submit" name="action" value="Delete Item" />
-						</div>
-						</form>
-					</div>';
+					outputProductCart($item);
 				}
 				
 				echo '<div class="section group">
