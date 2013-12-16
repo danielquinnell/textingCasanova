@@ -67,6 +67,12 @@
 					
 				if ($row = mysql_fetch_array($result))
 				{
+					/*$i = '0';
+						for ($n=0; $n<10; $n++) {
+    						echo ++$i . PHP_EOL;
+						}*/
+					
+					echo '<h4 class="productTop">Product # . ++$i </h3>';
 					echo '<div class="item_big';
 					if ($row['stock'] < 1 &&
 						$row['stock'] != -1)
