@@ -100,41 +100,41 @@ em {
 }
 
 #navigation a:hover {
-	background-color: #69905C;
-	color: #A3FF86;
+	background-color: #990000;
+	color: #000;
 }
 
 .navigation a:active {
-	background-color: #69905C;
-	color: #A3FF86;
+	background-color: #CC0000;
+	color: #990000;
 }
 
 .activePage {
 	background-color: #CC0000;
-	color: #A3FF86;
+	color: #990000;
 }
 
 /* Content area */
 
 h2 {
-	color: #A3FF86;
+	color: #CC0000;
 	font-family: exo;
-	font-weight:200;
+	font-weight: bold;
 	padding-top: 5px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
 h3 {
-	color: #A3FF86;
+	color: #000;
 	font-family: exo;
-	font-weight:200;
+	font-weight: bold;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
 h4 {
-	color: #A3FF86;
+	color: #000;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	margin: 0;
@@ -249,7 +249,7 @@ legend > input {
 /* Admin area */
 
 .scrollerUsers {
-	background-color: #3F6534;
+	background-color: #990000;
 	color: #FFF;
 	min-width:400px;
 	margin-left: 10px;
