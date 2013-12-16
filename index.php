@@ -1,6 +1,7 @@
 <?php
 	require_once 'conn.php';
 	require_once 'outputfunctions.php';
+	require_once 'modcart.php';
 	$page = "index";
 	require_once 'header.php';
 	
@@ -22,6 +23,13 @@
 			outputProduct($row['product_id'], FALSE);
 		}
 	}
+	
+	function miniCart(){
+	   ob_start();
+	   include('modcart.php');
+	   $page2 = ob_get_clean();
+	   return $page2;
+	   }
 	
 	require_once 'footer.php';
 ?>
