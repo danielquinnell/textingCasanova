@@ -7,7 +7,7 @@
 	
 	//If the user is not logged in, then redirect to the index
 	if (!isset($_SESSION['userid']) ||
-		!isset($_POST['cameFromCheckout']))
+		!isset($_POST['cameFromCheckout2']))
 	{
 		redirect('index.php');
 	}
@@ -15,8 +15,8 @@
 	{
 		echo '<h2>Checkout</h2>
 			<p>Step 1 - Enter Billing and Shipping Information</p>
-			<h2>Step 2 - Please Verify Accuracy and Make Changes</h2>
-			<p>Step 3 - Order Confirmation and Receipt</p>';
+			<p>Step 2 - Please Verify Accuracy and Make Changes</p>
+			<h2>Step 3 - Order Confirmation and Receipt</h2>';
 		
 		//Check if there are cart items first.
 		//If there are not, the user should not be able to checkout
@@ -47,15 +47,15 @@
 			$phone = $_POST['phone'];
 			$email = $_POST['email'];
 			
-			$shipping_first_name = $_POST['shipping_first_name'];
-			$shipping_last_name = $_POST['shipping_last_name'];
-			$shipping_address = $_POST['shipping_address'];
-			$shipping_address2 = $_POST['shipping_address2'];
-			$shipping_city = $_POST['shipping_city'];
-			$shipping_state = $_POST['shipping_state'];
-			$shipping_zip = $_POST['shipping_zip'];
-			$shipping_phone = $_POST['shipping_phone'];
-			$shipping_email = $_POST['shipping_email'];
+			$shipping_first_name = '';
+			$shipping_last_name = '';
+			$shipping_address = '';
+			$shipping_address2 = '';
+			$shipping_city = '';
+			$shipping_state = '';
+			$shipping_zip = '';
+			$shipping_phone = '';
+			$shipping_email = '';
 			
 			//Enter checkout information
 			echo '<form method="post" action="checkout3.php">';
@@ -69,7 +69,7 @@
 						<p>First Name:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="first_name" maxlength="100" value="' . htmlspecialchars($first_name) . '" />
+						<input disabled type="text" class="textInput" name="first_name" maxlength="100" value="' . htmlspecialchars($first_name) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -77,7 +77,7 @@
 						<p>Last Name:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="last_name" maxlength="100" value="' . htmlspecialchars($last_name) . '" />
+						<input disabled type="text" class="textInput" name="last_name" maxlength="100" value="' . htmlspecialchars($last_name) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -85,7 +85,7 @@
 						<p>Billing Address:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="address" maxlength="100" value="' . htmlspecialchars($address) . '" />
+						<input disabled type="text" class="textInput" name="address" maxlength="100" value="' . htmlspecialchars($address) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -93,7 +93,7 @@
 						<p>Billing Address 2:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="address2" maxlength="100" value="' . htmlspecialchars($address2) . '" />
+						<input disabled type="text" class="textInput" name="address2" maxlength="100" value="' . htmlspecialchars($address2) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -101,7 +101,7 @@
 						<p>City:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="city" maxlength="100" value="' . htmlspecialchars($city) . '" />
+						<input disabled type="text" class="textInput" name="city" maxlength="100" value="' . htmlspecialchars($city) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -109,7 +109,7 @@
 						<p>State:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="state" maxlength="2" value="' . htmlspecialchars($state) . '" />
+						<input disabled type="text" class="textInput" name="state" maxlength="2" value="' . htmlspecialchars($state) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -117,7 +117,7 @@
 						<p>Zip:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="zip" maxlength="9" value="' . htmlspecialchars($zip) . '" />
+						<input disabled type="text" class="textInput" name="zip" maxlength="9" value="' . htmlspecialchars($zip) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -125,7 +125,7 @@
 						<p>Phone Number:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="phone" maxlength="12" value="' . htmlspecialchars($phone) . '" />
+						<input disabled type="text" class="textInput" name="phone" maxlength="12" value="' . htmlspecialchars($phone) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -133,7 +133,7 @@
 						<p>Email Address:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input readonly type="text" class="textInput" name="email" maxlength="9" value="' . htmlspecialchars($email) . '" />
+						<input disabled type="text" class="textInput" name="email" maxlength="9" value="' . htmlspecialchars($email) . '" />
 					</div>
 				</div>
 				<div class="section group_checkout">
@@ -142,7 +142,7 @@
 					</div>
 					<div class="col span_2_of_2">
 						<input disabled type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing" ';
-				if (isset($_POST['address_same_as_billing']))
+				if ($_POST['address_same_as_billing'] == "true")
 				{
 					echo 'checked ';
 				}
@@ -153,7 +153,7 @@
 				</br>';
 			//Shipping information
 			
-			if (!isset($_POST['address_same_as_billing']))
+			if ($_POST['address_same_as_billing'] == "false")
 			{
 				echo '<div class="section checkout_block" id="shipping_address">
 				<div class="section group_checkout">
@@ -164,7 +164,7 @@
 							<p>First Name:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_first_name" maxlength="100" value="' . htmlspecialchars($shipping_first_name) . '" />
+							<input disabled type="text" class="textInput" name="shipping_first_name" maxlength="100" value="' . htmlspecialchars($shipping_first_name) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -172,7 +172,7 @@
 							<p>Last Name:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_last_name" maxlength="100" value="' . htmlspecialchars($shipping_last_name) . '" />
+							<input disabled type="text" class="textInput" name="shipping_last_name" maxlength="100" value="' . htmlspecialchars($shipping_last_name) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -180,7 +180,7 @@
 							<p>Shipping Address:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_address" maxlength="100" value="' . htmlspecialchars($shipping_address) . '" />
+							<input disabled type="text" class="textInput" name="shipping_address" maxlength="100" value="' . htmlspecialchars($shipping_address) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -188,7 +188,7 @@
 							<p>Shipping Address 2:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_address2" maxlength="100" value="' . htmlspecialchars($shipping_address2) . '" />
+							<input disabled type="text" class="textInput" name="shipping_address2" maxlength="100" value="' . htmlspecialchars($shipping_address2) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -196,7 +196,7 @@
 							<p>City:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_city" maxlength="100" value="' . htmlspecialchars($shipping_city) . '" />
+							<input disabled type="text" class="textInput" name="shipping_city" maxlength="100" value="' . htmlspecialchars($shipping_city) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -204,7 +204,7 @@
 							<p>State:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_state" maxlength="2" value="' . htmlspecialchars($shipping_state) . '" />
+							<input disabled type="text" class="textInput" name="shipping_state" maxlength="2" value="' . htmlspecialchars($shipping_state) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -212,7 +212,7 @@
 							<p>Zip:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_zip" maxlength="9" value="' . htmlspecialchars($shipping_zip) . '" />
+							<input disabled type="text" class="textInput" name="shipping_zip" maxlength="9" value="' . htmlspecialchars($shipping_zip) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -220,7 +220,7 @@
 							<p>Phone Number:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_phone" maxlength="12" value="' . htmlspecialchars($shipping_phone) . '" />
+							<input disabled type="text" class="textInput" name="shipping_phone" maxlength="12" value="' . htmlspecialchars($shipping_phone) . '" />
 						</div>
 					</div>
 					<div class="section group_checkout">
@@ -228,7 +228,7 @@
 							<p>Email Address:</p>
 						</div>
 						<div class="col span_2_of_2">
-							<input readonly type="text" class="textInput" name="shipping_email" maxlength="9" value="' . htmlspecialchars($shipping_email) . '" />
+							<input disabled type="text" class="textInput" name="shipping_email" maxlength="9" value="' . htmlspecialchars($shipping_email) . '" />
 						</div>
 					</div>
 					</div>';
@@ -298,17 +298,6 @@
 				outputProductCart($item, true);
 			}
 			
-			echo ' <input type="hidden" name="address_same_as_billing" value="'; 
-			if (isset($_POST['address_same_as_billing']))
-			{
-				echo 'true';
-			}
-			else
-			{
-				echo 'false';
-			}
-			echo '"/>';
-			echo ' <input type="hidden" name="cameFromCheckout2" value="true" />'; 
 			echo '		<input type="submit" class="submit" name="action" value="Confirm and Finish Order" />
 				  </form>';
 		}

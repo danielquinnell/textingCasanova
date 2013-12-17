@@ -123,7 +123,7 @@
 				
 				echo '<div class="section group">
 						<div class="col span_1_of_3">
-							<p>Your total before shipping is: </p>
+							<p>Your total before shipping and taxes is: </p>
 						</div>
 						<div class="col span_2_of_3"><p>';
 				echo '$' . $totalPrice . '</p>';

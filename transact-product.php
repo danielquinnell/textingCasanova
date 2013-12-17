@@ -72,6 +72,8 @@
 						
 						$amountAddingToCart = $_POST['quantity'] - $cart_quantity;
 						
+						//Make sure to not allow the user to add more
+						//to their cart than their is in stock
 						if ($amountAddingToCart <= $stock)
 						{
 							$cart_quantity += $amountAddingToCart;

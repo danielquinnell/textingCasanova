@@ -3,6 +3,7 @@
 	require_once 'outputfunctions.php';
 	$page = "checkout";
 	require_once 'header.php';
+	require_once 'http.php';
 	
 	//If the user is not logged in, then redirect to the index
 	if (!isset($_SESSION['userid']))
@@ -11,7 +12,10 @@
 	}
 	else
 	{
-		echo '<h2>Checkout</h2>';
+		echo '<h2>Checkout</h2>
+			<h2>Step 1 - Enter Billing and Shipping Information</h2>
+			<p>Step 2 - Please Verify Accuracy and Make Changes</p>
+			<p>Step 3 - Order Confirmation and Receipt</p>';
 		
 		//Check if there are cart items first.
 		//If there are not, the user should not be able to checkout
@@ -102,7 +106,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>First Name</p>
+						<p>First Name:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="first_name" maxlength="100" value="' . htmlspecialchars($first_name) . '" />
@@ -110,7 +114,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Last Name</p>
+						<p>Last Name:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="last_name" maxlength="100" value="' . htmlspecialchars($last_name) . '" />
@@ -118,7 +122,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Billing Address</p>
+						<p>Billing Address:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="address" maxlength="100" value="' . htmlspecialchars($address) . '" />
@@ -126,7 +130,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Billing Address 2</p>
+						<p>Billing Address 2:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="address2" maxlength="100" value="' . htmlspecialchars($address2) . '" />
@@ -134,7 +138,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>City</p>
+						<p>City:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="city" maxlength="100" value="' . htmlspecialchars($city) . '" />
@@ -142,7 +146,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>State</p>
+						<p>State:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="state" maxlength="2" value="' . htmlspecialchars($state) . '" />
@@ -150,7 +154,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Zip</p>
+						<p>Zip:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="zip" maxlength="9" value="' . htmlspecialchars($zip) . '" />
@@ -158,7 +162,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Phone Number</p>
+						<p>Phone Number:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="phone" maxlength="12" value="' . htmlspecialchars($phone) . '" />
@@ -166,7 +170,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Email Address</p>
+						<p>Email Address:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="email" maxlength="9" value="' . htmlspecialchars($email) . '" />
@@ -174,7 +178,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Address Same as Billing</p>
+						<p>Address Same as Billing:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="checkbox" class="checkbox" id="address_same_as_billing" name="address_same_as_billing"/>
@@ -189,7 +193,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>First Name</p>
+						<p>First Name:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_first_name" maxlength="100" value="' . htmlspecialchars($shipping_first_name) . '" />
@@ -197,7 +201,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Last Name</p>
+						<p>Last Name:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_last_name" maxlength="100" value="' . htmlspecialchars($shipping_last_name) . '" />
@@ -205,7 +209,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Shipping Address</p>
+						<p>Shipping Address:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_address" maxlength="100" value="' . htmlspecialchars($shipping_address) . '" />
@@ -213,7 +217,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Shipping Address 2</p>
+						<p>Shipping Address 2:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_address2" maxlength="100" value="' . htmlspecialchars($shipping_address2) . '" />
@@ -221,7 +225,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>City</p>
+						<p>City:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_city" maxlength="100" value="' . htmlspecialchars($shipping_city) . '" />
@@ -229,7 +233,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>State</p>
+						<p>State:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_state" maxlength="2" value="' . htmlspecialchars($shipping_state) . '" />
@@ -237,7 +241,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Zip</p>
+						<p>Zip:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_zip" maxlength="9" value="' . htmlspecialchars($shipping_zip) . '" />
@@ -245,7 +249,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Phone Number</p>
+						<p>Phone Number:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_phone" maxlength="12" value="' . htmlspecialchars($shipping_phone) . '" />
@@ -253,7 +257,7 @@
 				</div>
 				<div class="section group_checkout">
 					<div class="col span_1_of_2">
-						<p>Email Address</p>
+						<p>Email Address:</p>
 					</div>
 					<div class="col span_2_of_2">
 						<input type="text" class="textInput" name="shipping_email" maxlength="9" value="' . htmlspecialchars($shipping_email) . '" />
@@ -324,7 +328,7 @@
 				//=================================================================
 				outputProductCart($item, true);
 			}
-			
+			echo ' <input type="hidden" name="cameFromCheckout" value="true" />';
 			echo '		<input type="submit" class="submit" name="action" value="Submit Order" />
 				  </form>';
 		}

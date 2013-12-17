@@ -126,10 +126,13 @@
 	
 	function outputProductCart($item, $checkout=false)
 	{
-		echo '<div class="section group">
-			<form method="post" action="transact-product.php">
-			<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
-			<div class="col span_1_of_7">';
+		echo '<div class="section group">';
+		if (!$checkout)
+		{
+			echo '<form method="post" action="transact-product.php">
+			<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>';
+		}
+		echo '<div class="col span_1_of_7">';
 			
 		if ($checkout)
 		{
@@ -172,8 +175,12 @@
 				</div>
 				';
 		}
-		echo '</form>
-			</div>';
+		if (!$checkout)
+		{
+		    echo '</form>';
+		}
+		
+		echo '</div>';
 	}
 	
 	function outputProductDetail($productid)
