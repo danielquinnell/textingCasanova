@@ -304,3 +304,21 @@ legend > input {
 	padding: 1px;
 	margin: 1px;
 }
+
+/*form validation*/
+#signup_form fieldset {
+ padding:1em 1.5em;
+ border:1px solid #bbb;
+}
+ 
+#signup_form legend {
+ font-weight:bold;
+}
+ 
+#signup_form label {
+ display:block;
+}
+ 
+#signup_form label span {
+ color:#f00;
+}
