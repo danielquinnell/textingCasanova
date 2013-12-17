@@ -5,78 +5,50 @@
     	<title>Texting Casanova</title>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/grid.css" />
-        <script src="ckeditor/ckeditor.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="js/general.js"></script>
-         <div id='mainfunctions'>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script src="js/general.js"></script>
     </head>
-
-	<body>
+    
+   <body>
+   <div id='mainfunctions'>
+    	<div id="userinfo">
+            <?php
+            	if (!isset($_SESSION['userid']))
+				{
+					echo ' <a href="login.php">Login</a>';
+				}
+				else
+				{
+					echo "<div id=\"logowelcome\">\n";
+					echo 'Currently logged in as: ' . $_SESSION['name'];
+					echo "</div>";
+					echo ' <a href="transact-user.php?action=Logout">Logout</a>';
+				}
+			?>
+        </div> <!-- userinfo div -->
+        <div id="carticon">
+        	<a href="modcart.php">Cart</a>
+        </div> <!-- carticon div -->
+        	<form method="get" action="search.php">
+                <p class='head'>Search Website</p>
+                <p>
+                    <input id="searchkeywords" type="text" name="keywords"
+                        <?php
+                            if (isset($_GET['keywords']))
+                            {
+                                //If there are keywords, they'll be displayed in the search box
+                                echo ' value="' . htmlspecialchars($_GET['keywords']) . '" ';
+                            }
+                        ?>
+                     />
+                    <input id="searchbutton" class="submit" type="submit" value="Search" />
+                </p>
+            </form>
+	</div> <!-- mainfunctions div -->
     	<div id="logobar">
         	<div id="logo">
             	<h1>Texting Casanova Shopping Cart</h1>
             </div>	<!-- logo div -->
-            
-            <div id='mainfunctions'>
-                <form method="get" action="search.php">
-                    <p class='head'>Search Website</p>
-                    <p>
-                        <input id="searchkeywords" type="text" name="keywords"
-                            <?php
-                                if (isset($_GET['keywords']))
-                                {
-                                    //If there are keywords, they'll be displayed in the search box
-                                    echo ' value="' . htmlspecialchars($_GET['keywords']) . '" ';
-                                }
-                            ?>
-                         />
-                        <input id="searchbutton" class="submit" type="submit" value="Search" />
-                    </p>
-                </form>
-                <div id="userinfo">
-                <?php
-                	if (!isset($_SESSION['userid']))
-					{
-						echo ' <a href="login.php">Login</a>';
-					}
-					else
-					{
-						echo "<div id=\"logowelcome\">\n";
-						echo 'Currently logged in as: ' . $_SESSION['name'];
-						echo "</div>";
-						echo ' <a href="transact-user.php?action=Logout">Logout</a>';
-					}
-				?>
-                </div> <!-- userinfo div -->
-                <div id="carticon">
-                	<a href="modcart.php">Cart</a>
-                </div> <!-- carticon div -->
-                <form method="get" action="search.php">
-                    <p class='head'>Search Website</p>
-                    <p>
-                        <input id="searchkeywords" type="text" name="keywords"
-                            <?php
-                                if (isset($_GET['keywords']))
-                                {
-                                    //If there are keywords, they'll be displayed in the search box
-                                    echo ' value="' . htmlspecialchars($_GET['keywords']) . '" ';
-                                }
-                            ?>
-                         />
-                        <input id="searchbutton" class="submit" type="submit" value="Search" />
-                    </p>
-                </form>
-            </div> <!-- mainfunctions div -->
-    </head>
-	<body>
-    	<div id="logobar">
-        	<div id="logo">
-            	<h1>Texting Casanova Shopping Cart</h1>
-            </div>	<!-- logo div -->
-            
-           
         </div>	<!-- logobar div -->
         
         <div id='maincolumn'>
