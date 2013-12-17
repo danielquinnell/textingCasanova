@@ -24,7 +24,7 @@ body {
 
 a {
 	font-family: exo;
-	color: #CC0000;
+	color: #000;
 	text-decoration: none;
 	font-weight:bold;
 	padding-top:3px;
@@ -56,9 +56,9 @@ em {
 /* Navigation */
 
 #mainfunctions {
-	float: right;
-	margin-left: 60%;
-	
+	position: absolute;
+	left: 85%;
+	margin-top: 32px;
 }
 
 .head {

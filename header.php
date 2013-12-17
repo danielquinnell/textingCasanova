@@ -12,30 +12,7 @@
         		
         	});
         </script>
-    </head>
-
-	<body>
-    	<div id="logobar">
-        	<div id="logo">
-            	<h1>Texting Casanova Shopping Cart</h1>
-            </div>	<!-- logo div -->
-            
-            <div id='mainfunctions'>
-                <form method="get" action="search.php">
-                    <p class='head'>Search Website</p>
-                    <p>
-                        <input id="searchkeywords" type="text" name="keywords"
-                            <?php
-                                if (isset($_GET['keywords']))
-                                {
-                                    //If there are keywords, they'll be displayed in the search box
-                                    echo ' value="' . htmlspecialchars($_GET['keywords']) . '" ';
-                                }
-                            ?>
-                         />
-                        <input id="searchbutton" class="submit" type="submit" value="Search" />
-                    </p>
-                </form>
+         <div id='mainfunctions'>
                 <div id="userinfo">
                 <?php
                 	if (!isset($_SESSION['userid']))
@@ -54,7 +31,30 @@
                 <div id="carticon">
                 	<a href="modcart.php">Cart</a>
                 </div> <!-- carticon div -->
+                <form method="get" action="search.php">
+                    <p class='head'>Search Website</p>
+                    <p>
+                        <input id="searchkeywords" type="text" name="keywords"
+                            <?php
+                                if (isset($_GET['keywords']))
+                                {
+                                    //If there are keywords, they'll be displayed in the search box
+                                    echo ' value="' . htmlspecialchars($_GET['keywords']) . '" ';
+                                }
+                            ?>
+                         />
+                        <input id="searchbutton" class="submit" type="submit" value="Search" />
+                    </p>
+                </form>
             </div> <!-- mainfunctions div -->
+    </head>
+	<body>
+    	<div id="logobar">
+        	<div id="logo">
+            	<h1>Texting Casanova Shopping Cart</h1>
+            </div>	<!-- logo div -->
+            
+           
         </div>	<!-- logobar div -->
         
         <div id='maincolumn'>
