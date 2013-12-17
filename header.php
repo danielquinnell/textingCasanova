@@ -15,6 +15,9 @@
             <?php
             	if (!isset($_SESSION['userid']))
 				{
+					echo "<div id=\"logowelcome\">\n";
+					echo 'Please login to make purchaces.';
+					echo "</div>";
 					echo ' <a href="login.php">Login</a>';
 				}
 				else
