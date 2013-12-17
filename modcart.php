@@ -1,8 +1,11 @@
 <?php
-	require_once 'conn.php';
-	require_once 'outputfunctions.php';
-	$page = "cart";
-	require_once 'header.php';
+	if (!isset($page))
+	{
+		require_once 'conn.php';
+		require_once 'outputfunctions.php';
+		$page = "cart";
+		require_once 'header.php';
+	}
 	
 	if (isset($_SESSION['item_change_alert']))
 	{
@@ -33,6 +36,7 @@
 			{
 				echo '
 					<div class="section group">
+					<form method="post" action="transact-product.php">
 					<!--first row -->
 						<div class="col span_1_of_7">
 								<h3>Quantity</h3>
@@ -52,9 +56,9 @@
 						<div class="col span_6_of_7">
 						</div>
 						<div class="col span_7_of_7">
+							<input type="submit" class="submit" name="action" value="Empty Cart" />
 						</div>
 					</div>
-					<form method="post" action="transact-product.php">
 					<!-- 1st row END -->
 					<!-- Item Rows -->
 					';
@@ -125,11 +129,9 @@
 				echo '$' . $totalPrice . '</p>';
 				echo '	</div>
 						<div class="col span_3_of_3">
-						<form method="post" action="transact-product.php">
-							<input type="submit" class="submit" name="action" value="Empty Cart" />
-						</form>
-						</div>
-					  </div>';
+							<input type="submit" class="submit" name="action" value="Submit Order" />
+					  </div>
+					  </form>';
 					  }
 			else
 			{

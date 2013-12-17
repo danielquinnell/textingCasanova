@@ -170,6 +170,14 @@ p {
 	clear: left;
 }
 
+/* Checkout */
+
+.checkout_block {
+	margin: 100px;
+	background-color: #900;
+	width: 440px;
+}
+
 #maincolumn {
 	min-width: 700px;
 }

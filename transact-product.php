@@ -33,6 +33,8 @@
 					*/
 					redirect('index.php');
 					break;
+				case 'Submit Order':
+					break;
 				case 'Change Quantity':
 					if (isset($_POST['productid']) &&
 						isset($_POST['quantity']) &&
@@ -458,7 +460,7 @@
 		if (mysql_num_rows($result)>0)
 		{
 			$row = mysql_fetch_array($result);
-			$_SESSION['item_change_alert'] += "Deleted item: " . $row['name'] . " from cart. \n";
+			$_SESSION['item_change_alert'] = "Deleted item: " . $row['name'] . " from cart. \n";
 		}
 	}
 ?>
