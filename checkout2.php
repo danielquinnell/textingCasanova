@@ -308,6 +308,74 @@
 				echo 'false';
 			}
 			echo '"/>';
+			
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Total before shipping and taxes: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $totalPrice . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			//get the state
+			include 'taxshippingmodule.php';
+			
+			$taxRate = getTaxRate($state);
+			$taxes = round(($totalPrice * $taxRate), 2);
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Tax rate for state ' . strtoupper($state) . ': </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '%' . ($taxRate*100) . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Tax Price: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $taxes . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			$shipping_types = getShippingTypes($conn);
+			
+			//find the shipping type selected
+			$shipCost;
+			$shipNameType;
+			echo '<div class="section group">';
+			foreach ($shipping_types as $shipType) 
+			{
+				if ($_POST['shipping_types'] == $shipType['name'])
+				{
+					echo '<div class="col span_1_of_3">
+							<p>' . $shipType['description'] . '</p>
+						  </div>
+						  <div class="col span_3_of_3">
+							  <p>'. $shipType['cost'] . '</p>
+						  </div>';
+					$shipNameType = $shipType['name'];
+					$shipCost = $shipType['cost'];
+					break;
+				}
+			}
+			echo '</div>';
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Total: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . ($totalPrice + $taxes + $shipCost) . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			echo ' <input type="hidden" name="shipType" value="' . $shipNameType . '" />'; 
 			echo ' <input type="hidden" name="cameFromCheckout2" value="true" />'; 
 			echo '		<input type="submit" class="submit" name="action" value="Confirm and Finish Order" />
 				  </form>';
