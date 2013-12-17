@@ -141,7 +141,7 @@
 						<p>Address Same as Billing:</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input disabled type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing" ';
+						<input readonly type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing" ';
 				if (isset($_POST['address_same_as_billing']))
 				{
 					echo 'checked ';
