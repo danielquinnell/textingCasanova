@@ -385,6 +385,7 @@
 			echo '<div class="section group"> 
 			<p>You have no products to checkout with.</p>
 			</div>';
+			redirect('index.php');
 		}
 	}
 ?>

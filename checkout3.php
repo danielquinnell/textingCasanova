@@ -47,15 +47,18 @@
 			$phone = $_POST['phone'];
 			$email = $_POST['email'];
 			
-			$shipping_first_name = $_POST['shipping_first_name'];
-			$shipping_last_name = $_POST['shipping_last_name'];
-			$shipping_address = $_POST['shipping_address'];
-			$shipping_address2 = $_POST['shipping_address2'];
-			$shipping_city = $_POST['shipping_city'];
-			$shipping_state = $_POST['shipping_state'];
-			$shipping_zip = $_POST['shipping_zip'];
-			$shipping_phone = $_POST['shipping_phone'];
-			$shipping_email = $_POST['shipping_email'];
+			if (!isset($_POST['address_same_as_billing']))
+			{
+				$shipping_first_name = $_POST['shipping_first_name'];
+				$shipping_last_name = $_POST['shipping_last_name'];
+				$shipping_address = $_POST['shipping_address'];
+				$shipping_address2 = $_POST['shipping_address2'];
+				$shipping_city = $_POST['shipping_city'];
+				$shipping_state = $_POST['shipping_state'];
+				$shipping_zip = $_POST['shipping_zip'];
+				$shipping_phone = $_POST['shipping_phone'];
+				$shipping_email = $_POST['shipping_email'];
+			}
 			
 			//Enter checkout information
 			//Billing information
@@ -409,6 +412,7 @@
 			echo '<div class="section group"> 
 			<p>You have no products to checkout with.</p>
 			</div>';
+			redirect('index.php');
 		}
 	}
 ?>
