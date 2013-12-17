@@ -5,16 +5,10 @@
     	<title>Texting Casanova</title>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/grid.css" />
-<<<<<<< HEAD
         <script src="ckeditor/ckeditor.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script>
-        	$(document).ready(function (){
-        		
-        	});
-        </script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="js/general.js"></script>
          <div id='mainfunctions'>
-=======
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="js/general.js"></script>
     </head>
@@ -41,7 +35,6 @@
                         <input id="searchbutton" class="submit" type="submit" value="Search" />
                     </p>
                 </form>
->>>>>>> a9eba8c679470e26f686aa8bf1e0d66efd505979
                 <div id="userinfo">
                 <?php
                 	if (!isset($_SESSION['userid']))

@@ -72,44 +72,44 @@
 				
 				$totalPrice = 0;
 				
-					$sql = "SELECT * " . 
-						   "FROM cart_items " .
-						   "WHERE user_id=" . $_SESSION['userid'];
-				   
-					$result = mysql_query($sql, $conn);
-					if (mysql_num_rows($result)>0)
+				$sql = "SELECT * " . 
+					   "FROM cart_items " .
+					   "WHERE user_id=" . $_SESSION['userid'];
+			   
+				$result = mysql_query($sql, $conn);
+				if (mysql_num_rows($result)>0)
+				{
+					//For all items in the cart
+					while ($row = mysql_fetch_array($result))
 					{
-						//For all items in the cart
-						while ($row = mysql_fetch_array($result))
+						$sql = "SELECT image_path, name, price, stock " . 
+						   "FROM products " .
+						   "WHERE product_id=" . $row['product_id'];
+						
+						//Insert product information, including quantity
+						$product = mysql_query($sql, $conn);
+						if (mysql_num_rows($product)==1)
 						{
-							$sql = "SELECT image_path, name, price, stock " . 
-							   "FROM products " .
-							   "WHERE product_id=" . $row['product_id'];
-							
-							//Insert product information, including quantity
-							$product = mysql_query($sql, $conn);
-							if (mysql_num_rows($product)==1)
-							{
-								$prod = mysql_fetch_array($product);
-								$tempProdArray = array(
-									"product_id" => $row['product_id'],
-									"image_path" => $prod['image_path'],
-									"name" => $prod['name'],
-									"price" => $prod['price'],
-									"quantity" => $row['quantity'],
-									"stock" => $prod['stock']
-									);
-								$totalPrice += ($row['quantity']*$prod['price']);
-								$cartItems[] = $tempProdArray;
-							}
+							$prod = mysql_fetch_array($product);
+							$tempProdArray = array(
+								"product_id" => $row['product_id'],
+								"image_path" => $prod['image_path'],
+								"name" => $prod['name'],
+								"price" => $prod['price'],
+								"quantity" => $row['quantity'],
+								"stock" => $prod['stock']
+								);
+							$totalPrice += ($row['quantity']*$prod['price']);
+							$cartItems[] = $tempProdArray;
 						}
 					}
-					else
-					{
-						echo '<div class="section group"> 
-						<p>There are currently no products to view.</p>
-						</div>';
-					}
+				}
+				else
+				{
+					echo '<div class="section group"> 
+					<p>There are currently no products to view.</p>
+					</div>';
+				}
 				
 				//Populate based on an array that was just built
 				foreach ($cartItems as $item)
