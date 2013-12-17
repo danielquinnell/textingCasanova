@@ -183,7 +183,7 @@
 						mail($_POST['email'], $subject, $body)
 							or die('Could not send reminder email.');
 							*/
-						echo '<p> Reminder not sent. Since email is not functioning, even sending the reminder would prevent future logins since the password would be reset and be impossible to update since the hash is not reversible. To test reminder functionality with a mail server installed, goto line 119 of transact-user.php and uncomment the code and comment out line 138. Also uncomment line 141 so the page will redirect. </p>';
+						echo '<p> Reminder not sent. Since email is not functioning, even sending the reminder would prevent future logins since the password would be reset and be impossible to update since the hash is not reversible. To test reminder functionality with a mail server installed, goto line 167 of transact-user.php and uncomment the code and comment out line 185. Also uncomment line 189 so the page will redirect. </p>';
 					}
 				}
 				//redirect('login.php');

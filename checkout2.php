@@ -291,10 +291,6 @@
 			//Populate based on an array that was just built
 			foreach ($cartItems as $item)
 			{
-				//=================================================================
-				//If you want to make this more robust, then do a query
-				//for the amount of the item in stock
-				//=================================================================
 				outputProductCart($item, true);
 			}
 			

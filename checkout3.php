@@ -293,10 +293,6 @@
 			//Populate based on an array that was just built
 			foreach ($cartItems as $item)
 			{
-				//=================================================================
-				//If you want to make this more robust, then do a query
-				//for the amount of the item in stock
-				//=================================================================
 				outputProductCart($item, true);
 			}
 			
@@ -367,7 +363,7 @@
 					
 					
 			//After everything has been displayed:
-			//Empty the cart
+		    //Empty the cart (DONT replenish product stock)
 			$sql = "SELECT product_id " . 
 				   "FROM cart_items " .
 				   "WHERE user_id=" . $_SESSION['userid'];
@@ -403,9 +399,6 @@
 			}
 			mysql_query($sql, $conn)
 				or die('Could not insert order record: ' . mysql_error());
-			//Empty the cart (DONT replenish product stock)
-			
-			
 		}
 		else
 		{

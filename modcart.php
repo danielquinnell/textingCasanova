@@ -12,22 +12,6 @@
 		echo '<h3>' . $_SESSION['item_change_alert'] . '</h3>';
 		unset($_SESSION['item_change_alert']);
 	}
-	//echo '<div class="content">';
-	//echo '<div id="cart_header">';
-	//echo '<span class="quantity inline"><h3>Quantity</h3></span>';
-	//echo '<span class="item_image inline"><h3>Item Image</h3></span>';
-	//echo '<span class="item_name inline"><h3>Item Name</h3></span>';
-	//echo '<span class="price_each inline"><h3>Price Each</h3></span>';
-	//echo '<span class="price_ext inline"><h3>Extended Price</h3></span>';
-	//echo '<span class="clearBoth"/>';
-	
-	//echo '</div>';
-	//echo '<p> asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf </p>';
-	
-	//echo '<p> asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf </p>';
-	//Populate cart items
-	
-	//echo '</div>';
 ?>
 	<h2>Cart</h2>
     	
@@ -114,10 +98,6 @@
 				//Populate based on an array that was just built
 				foreach ($cartItems as $item)
 				{
-					//=================================================================
-					//If you want to make this more robust, then do a query
-					//for the amount of the item in stock
-					//=================================================================
 					outputProductCart($item);
 				}
 				
@@ -137,9 +117,6 @@
 					  }
 			else
 			{
-				//Populate based on session data?
-				//Simplest solution would be to tell
-				//the user they are required to login
 				echo '<em>Please login to view the cart.</em>';
 			}
 			?>

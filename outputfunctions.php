@@ -69,11 +69,6 @@
 					
 				if ($row = mysql_fetch_array($result))
 				{
-					/*$i = '0';
-						for ($n=0; $n<10; $n++) {
-    						echo ++$i . PHP_EOL;
-						}*/
-						
 					echo '<a href="getprod.php?productid=' . $productid . '"><h4 class="productTop">' . $row['name'] . '</h4></a>';
 					echo '<div class="item_big';
 					if ($row['stock'] < 1 &&
@@ -108,8 +103,6 @@
 						$row['stock'] != -1) &&
 						isset($_SESSION['userid']))
 					{
-						//echo '<form method="post" action="transact-product.php">';
-						//echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
 						echo '<form method="post" action="transact-product.php">
 							<input type="submit" class="submit" name="action" value="Add To Cart" />
 							<input type="hidden" name="productid" value="' . $productid . '"/>
