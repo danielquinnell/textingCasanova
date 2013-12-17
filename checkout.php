@@ -37,31 +37,40 @@
 				   "WHERE user_id=" . $_SESSION['userid'];
 		   
 		$result = mysql_query($sql, $conn);
-		$row;
 		if (mysql_num_rows($result)>0)
 		{
 			//For all items in the cart
 			$row = mysql_fetch_array($result);
 			
+			$sql = "SELECT * " .
+				   "FROM addresses_shipping " .
+				   "WHERE address_id=" . $row['address_id'];
+				   
+			$result_address = mysql_query($sql, $conn);
+			if (mysql_num_rows($result_address) > 0)
+			{
+				$row_address = mysql_fetch_array($result_address);
+			}
+			
 			$first_name = $row['first_name'];
 			$last_name = $row['last_name'];
-			$address = '';
-			$address2 = '';
-			$city = '';
-			$state = '';
-			$zip = '';
-			$phone = '';
-			$email = '';
+			$address = $row_address['address_line1'];
+			$address2 = $row_address['address_line2'];
+			$city = $row_address['city'];
+			$state = $row_address['state'];
+			$zip = $row_address['zip'];
+			$phone = $row['phone'];
+			$email = $row['email'];
 			
-			$billing_first_name = '';
-			$billing_last_name = '';
-			$billing_address = '';
-			$billing_address2 = '';
-			$billing_city = '';
-			$billing_state = '';
-			$billing_zip = '';
-			$billing_phone = '';
-			$billing_email = '';
+			$billing_first_name = $row['first_name'];
+			$billing_last_name = $row['last_name'];
+			$billing_address = $row_address['address_line1'];
+			$billing_address2 = $row_address['address_line2'];
+			$billing_city = $row_address['city'];
+			$billing_state = $row_address['state'];
+			$billing_zip = $row_address['zip'];
+			$billing_phone = $row['phone'];
+			$billing_email = $row['email'];
 		}
 		
 		//Enter checkout information
@@ -144,10 +153,18 @@
 					<input type="text" class="textInput" name="email" maxlength="9" value="' . htmlspecialchars($email) . '" />
 				</div>
 			</div>
+			<div class="section group_checkout">
+				<div class="col span_1_of_2">
+					<p>Address Same as Billing</p>
+				</div>
+				<div class="col span_2_of_2">
+					<input type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing"/>
+				</div>
+			</div>
 			</div>
 			</br>';
 		//Shipping information
-		echo '<div class="section checkout_block">
+		echo '<div class="section checkout_block" id="shipping_address">
 		<div class="section group_checkout">
 				<h3>Shipping Information</h3>
 			</div>
