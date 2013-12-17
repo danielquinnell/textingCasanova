@@ -16,7 +16,7 @@
 		echo '<h2>Checkout</h2>
 			<p>Step 1 - Enter Billing and Shipping Information</p>
 			<p>Step 2 - Please Verify Accuracy and Make Changes</p>
-			<h2>Step 3 - Order Confirmation and Receipt</h2>';
+			<h2>Step 3 - Order Confirmation and Receipt: Your order has (not really) been placed. You will (not really) receive an email to confirm your order shortly.</h2>';
 		
 		//Check if there are cart items first.
 		//If there are not, the user should not be able to checkout
@@ -47,18 +47,20 @@
 			$phone = $_POST['phone'];
 			$email = $_POST['email'];
 			
-			$shipping_first_name = '';
-			$shipping_last_name = '';
-			$shipping_address = '';
-			$shipping_address2 = '';
-			$shipping_city = '';
-			$shipping_state = '';
-			$shipping_zip = '';
-			$shipping_phone = '';
-			$shipping_email = '';
+			if (!isset($_POST['address_same_as_billing']))
+			{
+				$shipping_first_name = $_POST['shipping_first_name'];
+				$shipping_last_name = $_POST['shipping_last_name'];
+				$shipping_address = $_POST['shipping_address'];
+				$shipping_address2 = $_POST['shipping_address2'];
+				$shipping_city = $_POST['shipping_city'];
+				$shipping_state = $_POST['shipping_state'];
+				$shipping_zip = $_POST['shipping_zip'];
+				$shipping_phone = $_POST['shipping_phone'];
+				$shipping_email = $_POST['shipping_email'];
+			}
 			
 			//Enter checkout information
-			echo '<form method="post" action="checkout3.php">';
 			//Billing information
 			echo '<div class="section checkout_block">
 				<div class="section group_checkout">
@@ -291,21 +293,119 @@
 			//Populate based on an array that was just built
 			foreach ($cartItems as $item)
 			{
-				//=================================================================
-				//If you want to make this more robust, then do a query
-				//for the amount of the item in stock
-				//=================================================================
 				outputProductCart($item, true);
 			}
 			
-			echo '		<input type="submit" class="submit" name="action" value="Confirm and Finish Order" />
-				  </form>';
+			
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Total before shipping and taxes: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $totalPrice . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			//get the state
+			include 'taxshippingmodule.php';
+			
+			$taxRate = getTaxRate($state);
+			$taxes = round(($totalPrice * $taxRate), 2);
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Tax rate for state ' . strtoupper($state) . ': </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '%' . ($taxRate*100) . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Tax Price: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $taxes . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+			
+			$shipping_types = getShippingTypes($conn);
+			
+			//find the shipping type selected
+			$shipCost;
+			echo '<div class="section group">';
+			foreach ($shipping_types as $shipType) 
+			{
+				if ($_POST['shipType'] == $shipType['name'])
+				{
+					echo '<div class="col span_1_of_3">
+							<p>' . $shipType['description'] . '</p>
+						  </div>
+						  <div class="col span_3_of_3">
+							  <p>'. $shipType['cost'] . '</p>
+						  </div>';
+					$shipCost = $shipType['cost'];
+					break;
+				}
+			}
+			echo '</div>';
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Total: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . ($totalPrice + $taxes + $shipCost) . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3"></div></div>';
+					
+					
+			//After everything has been displayed:
+		    //Empty the cart (DONT replenish product stock)
+			$sql = "SELECT product_id " . 
+				   "FROM cart_items " .
+				   "WHERE user_id=" . $_SESSION['userid'];
+		   
+		   	$numItemsDeletedToPreventOrderRecordDuplication = 0;
+			$result = mysql_query($sql, $conn);
+			if (mysql_num_rows($result)>0)
+			{
+				$numItemsDeletedToPreventOrderRecordDuplication++;
+				
+				while ($row = mysql_fetch_array($result))
+				{
+					$sql = "DELETE FROM cart_items " .
+						   "WHERE product_id=" . $row['product_id'];
+					
+					mysql_query($sql, $conn)
+						or die('Could not delete item from cart: ' . mysql_error());
+				}
+			}
+			
+			//Create an order record
+			if ($numItemsDeletedToPreventOrderRecordDuplication > 0)
+			{
+				$sql = "INSERT INTO orders " .
+					   "(user_id, itemlist_id, notes, shipping_cost, tax_cost, subtotal) " .
+					   "VALUES (" . $_SESSION['userid'] .
+					   "," . 0 .
+					   ",'" . " " .
+					   "'," . $shipCost . 
+					   "," . $taxes .
+					   "," . ($totalPrice + $taxes + $shipCost) .
+					   ")";
+			}
+			mysql_query($sql, $conn)
+				or die('Could not insert order record: ' . mysql_error());
 		}
 		else
 		{
 			echo '<div class="section group"> 
 			<p>You have no products to checkout with.</p>
 			</div>';
+			redirect('index.php');
 		}
 	}
 ?>

@@ -15,24 +15,6 @@
 		{
 			switch ($_REQUEST['action'])
 			{
-				case 'Submit New Product':
-					/*
-					if (isset($_POST['title'])
-						and isset($_POST['body'])
-						and isset($_SESSION['userid']))
-					{
-						$sql = "INSERT INTO cms_articles " .
-							   "(title, body, author_id, date_submitted) " .
-							   "VALUES ('" . $_POST['title'] .
-							   "','" . $_POST['body'] .
-							   "'," . $_SESSION['userid'] . ",'" .
-							   date("Y-m-d H:i:s", time()) . "')";
-						mysql_query($sql, $conn)
-							or die('Could not submit article: ' . mysql_error());
-					}
-					*/
-					redirect('index.php');
-					break;
 				case 'Submit Order':
 					break;
 				case 'Change Quantity':
@@ -222,9 +204,6 @@
 								}
 							}
 						}
-						
-						//If not, then populate the session
-						//For now, just work off of the sql
 					}
 					redirect('modcart.php');
 					break;
@@ -240,13 +219,6 @@
 				case 'Empty Cart':
 					if (isset($_SESSION['userid']))
 					{
-						//Can't do previous option. Have to return all
-						//items in cart to the inventory stock
-						//Will have to get all rows in the cart for the
-						//user, and update each one specificall. Maybe call
-						//a function 'delete' and export the delete case
-						//functionality to a function? YES do that;
-						
 						$sql = "SELECT product_id " . 
 							   "FROM cart_items " .
 							   "WHERE user_id=" . $_SESSION['userid'];
@@ -266,127 +238,6 @@
 						}
 					}
 					redirect('modcart.php');
-					break;
-				case 'Save Changes':
-				/*
-					if (isset($_POST['title'])
-						and isset($_POST['body'])
-						and isset($_POST['article']))
-					{
-						$sql = "UPDATE cms_articles " .
-							   "SET title='" . $_POST['title'] .
-							   "', body='" . $_POST['body'] .
-							   "', date_submitted='" . date("Y-m-d H:i:s", time()) . "' " .
-							   "WHERE article_id=" . $_POST['article'];
-							   
-							   if (isset($_POST['authorid']))
-							   {
-								   $sql .= " AND author_id=" . $_POST['authorid'];
-							   }
-							   mysql_query($sql, $conn)
-									or die('Could not update article: ' . mysql_error());
-					}
-					if (isset($_POST['authorid']))
-					{
-						redirect('cpanel.php');
-					}
-					else
-					{
-						
-						redirect('pending.php');
-					}
-					break;*/
-				case 'Publish':
-					/*
-					if ($_POST['article'])
-					{
-						$sql = "UPDATE cms_articles " .
-							   "SET is_published = 1, date_published='" .
-							   date("Y-m-d H:i:s", time()) . "' " .
-							   "WHERE article_id=" . $_POST['article'];
-						mysql_query($sql, $conn)
-							or die('Could not published article: ' . mysql_error());
-						
-						//Now add a history item
-						$sql = "INSERT INTO cms_article_history " .
-							   "(article_id, date_edited, published) " .
-							   "VALUES ('" . $_POST['article'] .
-							   "','" . date("Y-m-d H:i:s", time()) .
-							   "'," . 1 . ")";
-							   
-						mysql_query($sql, $conn)
-							or die('Could not insert history record: ' . mysql_error());
-					}
-					redirect('pending.php');
-					*/
-					break;
-				case 'Retract':
-				/*
-					if ($_POST['article'])
-					{
-						$sql = "UPDATE cms_articles " .
-							   "SET is_published=0, date_published=''" .
-							   "WHERE article_id=" . $_POST['article'];
-						mysql_query($sql, $conn)
-							or die('Could not retract article: ' . mysql_error());
-							
-						$sql = "INSERT INTO cms_article_history " .
-							   "(article_id, date_edited, published) " .
-							   "VALUES ('" . $_POST['article'] .
-							   "','" . date("Y-m-d H:i:s", time()) .
-							   "'," . 0 . ")";
-						
-						mysql_query($sql, $conn)
-							or die('Could not insert history record: ' . mysql_error());
-					}
-					redirect('pending.php');
-					*/
-					break;
-				case 'Delete':
-					/*
-					if ($_POST['article'])
-					{
-						$sql = "DELETE FROM cms_articles " .
-							   "WHERE is_published=0 " .
-							   "AND article_id=" . $_POST['article'];
-						mysql_query($sql, $conn)
-							or die('Could not delete article: ' . mysql_error());
-					}
-					redirect('pending.php');
-					*/
-					break;
-				case 'Submit Comment':
-					/*
-					if (isset($_POST['article'])
-						and $_POST['article']
-						and isset($_POST['comment'])
-						and $_POST['comment'])
-					{
-						$sql = "INSERT INTO cms_comments " .
-							   "(article_id, comment_date, comment_user, comment) " .
-							   "VALUES (" . $_POST['article'] . ",'" .
-							   date("Y-m-d H:i:s", time()) .
-							   "'," . $_SESSION['userid'] .
-							   ",'" . $_POST['comment'] . "')";
-						mysql_query($sql, $conn)
-							or die('Could not add comment: ' . mysql_error());
-					}
-					redirect('viewarticle.php?article=' . $_POST['article']);
-					*/
-					break;
-				case 'remove':
-					/*
-					if (isset($_GET['article'])
-						and isset($_SESSION['userid']))
-					{
-						$sql = "DELETE FROM cms_articles " .
-							   "WHERE article_id=" . $_GET['article'] .
-							   " AND author_id=" . $_SESSION['userid'];
-						mysql_query($sql, $conn)
-							or die('Could not remove article: ' . mysql_error());
-					}
-					redirect('cpanel.php');
-					*/
 					break;
 			}
 		}
