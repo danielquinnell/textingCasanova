@@ -98,7 +98,7 @@
 			}
 			
 			//Enter checkout information
-			echo '<form method="post" action="checkout2.php">';
+			echo '<form method="post" action="checkout2.php" id="form_submit">';
 			//Billing information
 			echo '<div class="section checkout_block">
 				<div class="section group_checkout">
