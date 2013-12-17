@@ -328,6 +328,31 @@
 				//=================================================================
 				outputProductCart($item, true);
 			}
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Total before shipping and taxes: </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $totalPrice . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3">';
+			
+			//get the state
+			include 'taxmodule.php';
+			
+			$taxes = $totalPrice * getTaxRate($state);
+			
+			echo '<div class="section group">
+						<div class="col span_1_of_3">
+							<p>Taxes for state ' . $state . ': </p>
+						</div>
+						<div class="col span_2_of_3"><p>';
+			echo '$' . $taxes . '</p>';
+			echo '	</div>
+					<div class="col span_3_of_3">';
+			
+			
 			echo ' <input type="hidden" name="cameFromCheckout" value="true" />';
 			echo '		<input type="submit" class="submit" name="action" value="Submit Order" />
 				  </form>';
