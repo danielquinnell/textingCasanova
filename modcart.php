@@ -129,9 +129,11 @@
 				echo '$' . $totalPrice . '</p>';
 				echo '	</div>
 						<div class="col span_3_of_3">
+						</form>
+						<form method="post" action="checkout.php">
 							<input type="submit" class="submit" name="action" value="Submit Order" />
-					  </div>
-					  </form>';
+					  	</form>
+					  </div>';
 					  }
 			else
 			{

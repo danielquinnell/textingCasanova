@@ -129,8 +129,17 @@
 		echo '<div class="section group">
 			<form method="post" action="transact-product.php">
 			<input type="hidden" name="productid" value="' . $item['product_id'] . '"/>
-			<div class="col span_1_of_7"><input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
-				($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
+			<div class="col span_1_of_7">';
+			
+		if ($checkout)
+		{
+			echo '<p>' . $item['quantity'] . '</p>';
+		}
+		else
+		{
+			echo '<input type="number" class="submit" name="quantity" value=' . $item['quantity'] . ' min="1" ' . 
+					($item['stock'] == -1 ? ' max="99" />' : ' max="' . ($item['stock'] + $item['quantity']) . '" />');
+		}
 		echo '
 			</div>
 			<div class="col span_2_of_7">';

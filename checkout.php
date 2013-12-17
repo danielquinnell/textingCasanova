@@ -32,6 +32,38 @@
 		$billing_phone = '';
 		$billing_email = '';
 		
+		$sql = "SELECT * " . 
+				   "FROM users " .
+				   "WHERE user_id=" . $_SESSION['userid'];
+		   
+		$result = mysql_query($sql, $conn);
+		$row;
+		if (mysql_num_rows($result)>0)
+		{
+			//For all items in the cart
+			$row = mysql_fetch_array($result);
+			
+			$first_name = $row['first_name'];
+			$last_name = $row['last_name'];
+			$address = '';
+			$address2 = '';
+			$city = '';
+			$state = '';
+			$zip = '';
+			$phone = '';
+			$email = '';
+			
+			$billing_first_name = '';
+			$billing_last_name = '';
+			$billing_address = '';
+			$billing_address2 = '';
+			$billing_city = '';
+			$billing_state = '';
+			$billing_zip = '';
+			$billing_phone = '';
+			$billing_email = '';
+		}
+		
 		//Enter checkout information
 		echo '<form method="post" action="checkout2.php">';
 		//Billing information
