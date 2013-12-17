@@ -4,10 +4,12 @@
 	$page = "index";
 	require_once 'header.php';
 	
-	echo '<div class="cart_mini">';
-	include('modcart.php');
-	echo '</div>';
-	
+	if (isset($_SESSION['userid']))
+	{
+		echo '<div class="cart_mini">';
+		include('modcart.php');
+		echo '</div>';
+	}
 	$sql = "SELECT product_id " . 
 		   "FROM products";
 		   

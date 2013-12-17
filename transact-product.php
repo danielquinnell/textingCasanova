@@ -133,7 +133,8 @@
 							//Check if the cart already has product added.
 							$sql = "SELECT product_id, quantity " .
 								   "FROM cart_items " .
-								   "WHERE product_id=" . $_POST['productid'];
+								   "WHERE product_id=" . $_POST['productid'] . " AND " .
+								   "user_id=" . $_SESSION['userid'];
 							echo '<p>' . $sql . '</p>';
 							mysql_query($sql, $conn)
 								or die('Could not select existing items from cart: ' . mysql_error());
