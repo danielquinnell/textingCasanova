@@ -137,19 +137,6 @@
 						<input disabled type="text" class="textInput" name="email" maxlength="9" value="' . htmlspecialchars($email) . '" />
 					</div>
 				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Address Same as Billing:</p>
-					</div>
-					<div class="col span_2_of_2">
-						<input disabled type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing" ';
-				if ($_POST['address_same_as_billing'] == "true")
-				{
-					echo 'checked ';
-				}
-				echo '/>
-					</div>
-				</div>
 				</div>
 				</br>';
 			//Shipping information
