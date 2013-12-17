@@ -32,15 +32,15 @@
 		if (mysql_num_rows($result)>0)
 		{
 			//Get all information that the customer might have
-			$first_name = '';
-			$last_name = '';
-			$address = '';
-			$address2 = '';
-			$city = '';
-			$state = '';
-			$zip = '';
-			$phone = '';
-			$email = '';
+			$first_name = $_POST['first_name'];
+			$last_name = $_POST['last_name'];
+			$address = $_POST['address'];
+			$address2 = $_POST['address2'];
+			$city = $_POST['city'];
+			$state = $_POST['state'];
+			$zip = $_POST['zip'];
+			$phone = $_POST['phone'];
+			$email = $_POST['email'];
 			
 			$shipping_first_name = '';
 			$shipping_last_name = '';
@@ -51,47 +51,6 @@
 			$shipping_zip = '';
 			$shipping_phone = '';
 			$shipping_email = '';
-			
-			$sql = "SELECT * " . 
-					   "FROM users " .
-					   "WHERE user_id=" . $_SESSION['userid'];
-			   
-			$result_user = mysql_query($sql, $conn);
-			if (mysql_num_rows($result_user)>0)
-			{
-				//For all items in the cart
-				$row_user = mysql_fetch_array($result_user);
-				
-				$sql = "SELECT * " .
-					   "FROM addresses_shipping " .
-					   "WHERE address_id=" . $row_user['address_id'];
-					   
-				$result_address = mysql_query($sql, $conn);
-				if (mysql_num_rows($result_address) > 0)
-				{
-					$row_address = mysql_fetch_array($result_address);
-				}
-				
-				$first_name = $row_user['first_name'];
-				$last_name = $row_user['last_name'];
-				$address = $row_address['address_line1'];
-				$address2 = $row_address['address_line2'];
-				$city = $row_address['city'];
-				$state = $row_address['state'];
-				$zip = $row_address['zip'];
-				$phone = $row_user['phone'];
-				$email = $row_user['email'];
-				
-				$shipping_first_name = $row_user['first_name'];
-				$shipping_last_name = $row_user['last_name'];
-				$shipping_address = $row_address['address_line1'];
-				$shipping_address2 = $row_address['address_line2'];
-				$shipping_city = $row_address['city'];
-				$shipping_state = $row_address['state'];
-				$shipping_zip = $row_address['zip'];
-				$shipping_phone = $row_user['phone'];
-				$shipping_email = $row_user['email'];
-			}
 			
 			//Enter checkout information
 			echo '<form method="post" action="checkout2.php">';
@@ -177,89 +136,93 @@
 						<p>Address Same as Billing</p>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" class="checkbox" id="address_same_as_billing" name="address_same_as_billing"/>
+						<input type="checkbox" class="textInput" id="address_same_as_billing" name="address_same_as_billing"/>
 					</div>
 				</div>
 				</div>
 				</br>';
 			//Shipping information
-			echo '<div class="section checkout_block" id="shipping_address">
-			<div class="section group_checkout">
-					<h3>Shipping Information</h3>
-				</div>
+			
+			if (!isset($_POST['address_same_as_billing']))
+			{
+				echo '<div class="section checkout_block" id="shipping_address">
 				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>First Name</p>
+						<h3>Shipping Information</h3>
 					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_first_name" maxlength="100" value="' . htmlspecialchars($shipping_first_name) . '" />
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>First Name</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_first_name" maxlength="100" value="' . htmlspecialchars($shipping_first_name) . '" />
+						</div>
 					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Last Name</p>
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Last Name</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_last_name" maxlength="100" value="' . htmlspecialchars($shipping_last_name) . '" />
+						</div>
 					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_last_name" maxlength="100" value="' . htmlspecialchars($shipping_last_name) . '" />
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Shipping Address</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_address" maxlength="100" value="' . htmlspecialchars($shipping_address) . '" />
+						</div>
 					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Shipping Address</p>
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Shipping Address 2</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_address2" maxlength="100" value="' . htmlspecialchars($shipping_address2) . '" />
+						</div>
 					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_address" maxlength="100" value="' . htmlspecialchars($shipping_address) . '" />
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>City</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_city" maxlength="100" value="' . htmlspecialchars($shipping_city) . '" />
+						</div>
 					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Shipping Address 2</p>
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>State</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_state" maxlength="2" value="' . htmlspecialchars($shipping_state) . '" />
+						</div>
 					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_address2" maxlength="100" value="' . htmlspecialchars($shipping_address2) . '" />
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Zip</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_zip" maxlength="9" value="' . htmlspecialchars($shipping_zip) . '" />
+						</div>
 					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>City</p>
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Phone Number</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_phone" maxlength="12" value="' . htmlspecialchars($shipping_phone) . '" />
+						</div>
 					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_city" maxlength="100" value="' . htmlspecialchars($shipping_city) . '" />
+					<div class="section group_checkout">
+						<div class="col span_1_of_2">
+							<p>Email Address</p>
+						</div>
+						<div class="col span_2_of_2">
+							<input type="text" class="textInput" name="shipping_email" maxlength="9" value="' . htmlspecialchars($shipping_email) . '" />
+						</div>
 					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>State</p>
-					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_state" maxlength="2" value="' . htmlspecialchars($shipping_state) . '" />
-					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Zip</p>
-					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_zip" maxlength="9" value="' . htmlspecialchars($shipping_zip) . '" />
-					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Phone Number</p>
-					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_phone" maxlength="12" value="' . htmlspecialchars($shipping_phone) . '" />
-					</div>
-				</div>
-				<div class="section group_checkout">
-					<div class="col span_1_of_2">
-						<p>Email Address</p>
-					</div>
-					<div class="col span_2_of_2">
-						<input type="text" class="textInput" name="shipping_email" maxlength="9" value="' . htmlspecialchars($shipping_email) . '" />
-					</div>
-				</div>
-				</div>';
+					</div>';
+			}
 			//Cart items (for review)
 			echo '</br>
 				<div class="section group">

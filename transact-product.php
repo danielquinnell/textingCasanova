@@ -72,62 +72,69 @@
 						
 						$amountAddingToCart = $_POST['quantity'] - $cart_quantity;
 						
-						$cart_quantity += $amountAddingToCart;
-						
-						if ($stock != -1)
+						if ($amountAddingToCart <= $stock)
 						{
-							$stock -= $amountAddingToCart;
-						}
-						$sql = "UPDATE cart_items " .
-							   "SET quantity= " . $cart_quantity . " " .
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not update item quantity: ' . mysql_error());
-						
-						if ($stock != -1)
-						{
-							$sql = "UPDATE products " .
-								   "SET stock= " . $stock . " " .
+							$cart_quantity += $amountAddingToCart;
+							
+							if ($stock != -1)
+							{
+								$stock -= $amountAddingToCart;
+							}
+							$sql = "UPDATE cart_items " .
+								   "SET quantity= " . $cart_quantity . " " .
 								   "WHERE product_id=" . $_POST['productid'];
 							
 							mysql_query($sql, $conn)
 								or die('Could not update item quantity: ' . mysql_error());
+							
+							if ($stock != -1)
+							{
+								$sql = "UPDATE products " .
+									   "SET stock= " . $stock . " " .
+									   "WHERE product_id=" . $_POST['productid'];
+								
+								mysql_query($sql, $conn)
+									or die('Could not update item quantity: ' . mysql_error());
+							}
+							
+							$sql = "SELECT name " .
+								   "FROM products " . 
+								   "WHERE product_id=" . $_POST['productid'];
+							
+							mysql_query($sql, $conn)
+								or die('Could not select name for item: ' . mysql_error());
+							
+							$result = mysql_query($sql, $conn);
+							if (mysql_num_rows($result)>0)
+							{
+								$row = mysql_fetch_array($result);
+								if ($amountAddingToCart < 0)
+								{
+									if ($amountAddingToCart < -1)
+									{
+										$_SESSION['item_change_alert'] = "Removed   " . ($amountAddingToCart*-1) . " " . $row['name'] . "'s from cart.";		
+									}
+									else
+									{
+										$_SESSION['item_change_alert'] = "Removed one " . $row['name'] . " from cart.";
+									}
+								}
+								else if ($amountAddingToCart > 0)
+								{
+									if ($amountAddingToCart > 1)
+									{
+										$_SESSION['item_change_alert'] = "Added   " . $amountAddingToCart . " " . $row['name'] . "'s to cart.";	
+									}
+									else
+									{
+										$_SESSION['item_change_alert'] = "Added one " . $row['name'] . " to cart.";	
+									}
+								}
+							}
 						}
-						
-						$sql = "SELECT name " .
-							   "FROM products " . 
-							   "WHERE product_id=" . $_POST['productid'];
-						
-						mysql_query($sql, $conn)
-							or die('Could not select name for item: ' . mysql_error());
-						
-						$result = mysql_query($sql, $conn);
-						if (mysql_num_rows($result)>0)
+						else
 						{
-							$row = mysql_fetch_array($result);
-							if ($amountAddingToCart < 0)
-							{
-								if ($amountAddingToCart < -1)
-								{
-									$_SESSION['item_change_alert'] = "Removed   " . ($amountAddingToCart*-1) . " " . $row['name'] . "'s from cart.";		
-								}
-								else
-								{
-									$_SESSION['item_change_alert'] = "Removed one " . $row['name'] . " from cart.";
-								}
-							}
-							else if ($amountAddingToCart > 0)
-							{
-								if ($amountAddingToCart > 1)
-								{
-									$_SESSION['item_change_alert'] = "Added   " . $amountAddingToCart . " " . $row['name'] . "'s to cart.";	
-								}
-								else
-								{
-									$_SESSION['item_change_alert'] = "Added one " . $row['name'] . " to cart.";	
-								}
-							}
+							$_SESSION['item_change_alert'] = "Not enough of item left in stock.";	
 						}
 					}
 					redirect('modcart.php');
