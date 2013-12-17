@@ -5,13 +5,8 @@
     	<title>Texting Casanova</title>
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/grid.css" />
-        <script src="ckeditor/ckeditor.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script>
-        	$(document).ready(function (){
-        		
-        	});
-        </script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="js/general.js"></script>
     </head>
 
 	<body>
