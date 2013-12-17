@@ -166,7 +166,7 @@ p {
 .cart_mini {
 	left: 825px;
 	margin-top: 10%;
-	position: absolute;
+	position: fixed;
 	border-style:solid;
 	border-width:20px;
 	background: black;
