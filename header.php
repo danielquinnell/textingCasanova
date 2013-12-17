@@ -6,6 +6,12 @@
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/grid.css" />
         <script src="ckeditor/ckeditor.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+        <script>
+        	$(document).ready(function (){
+        		
+        	});
+        </script>
     </head>
 
 	<body>
