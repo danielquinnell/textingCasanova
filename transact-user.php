@@ -96,7 +96,7 @@
 					$_SESSION['access_lvl'] = 1;
 					$_SESSION['name'] = $_POST['first_name'];
 				}
-				//redirect('index.php');
+				redirect('index.php');
 				break;
 			case 'Update Account':
 				if (isset($_POST['first_name'])
