@@ -172,6 +172,16 @@ p {
 	background: black;
 }
 
+<<<<<<< HEAD
+=======
+/* Checkout */
+
+.checkout_block {
+	margin: 100px;
+	background-color: #900;
+	width: 440px;
+}
+>>>>>>> 21d623b7ae349ae991091659a8694471fc60e456
 
 #maincolumn {
 	min-width: 700px;

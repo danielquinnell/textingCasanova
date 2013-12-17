@@ -33,6 +33,8 @@
 		}
 	}
 	
+	$productIndex = 0;
+	
 	function outputProduct($productid, $only_snippet=FALSE)
 	{
 		global $conn;
@@ -71,8 +73,8 @@
 						for ($n=0; $n<10; $n++) {
     						echo ++$i . PHP_EOL;
 						}*/
-					
-					echo '<h4 class="productTop">Product # . ++$i </h3>';
+						
+					echo '<a href="getprod.php?productid=' . $productid . '"><h4 class="productTop">' . $row['name'] . '</h4></a>';
 					echo '<div class="item_big';
 					if ($row['stock'] < 1 &&
 						$row['stock'] != -1)
@@ -95,7 +97,6 @@
 					echo '<a href="getprod.php?productid=' . $productid . '"><img src="images/thumb/' . $row['image_path'] . '_thumb.png" /img></a>';
 					echo '</div>';
 					echo '<div class="col span_2_of_3-2">';
-					echo '<a href="getprod.php?productid=' . $productid . '"><h3>' . $row['name'] . '</h3></a>';
 					// description
 					echo '<p class="description_short">' . $row['description_short'] . '</p>';
 					echo '</div>';
@@ -107,13 +108,12 @@
 						$row['stock'] != -1) &&
 						isset($_SESSION['userid']))
 					{
-						echo '<form method="post" action="transact-product.php">';
+						//echo '<form method="post" action="transact-product.php">';
 						//echo '<a href="transact-product.php?action=AddToCart&productid=' . $productid . '&quantity=1" >Add to Cart</a>';
-						echo '
+						echo '<form method="post" action="transact-product.php">
 							<input type="submit" class="submit" name="action" value="Add To Cart" />
 							<input type="hidden" name="productid" value="' . $productid . '"/>
-							</form>
-							';
+							</form>';
 					}
 					echo '</div>';
 					echo '</div>';
